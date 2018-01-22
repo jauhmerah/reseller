@@ -6,21 +6,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @extends CI_Controller
  */
-class User extends CI_Controller {
-
-	/**
-	 * __construct function.
+class A_user extends CI_Controller {
+	/**	 * __construct function.
 	 *
 	 * @access public
 	 * @return void
 	 */
+	var $parent_page = 'admin/user';
 	public function __construct() {
 
 		parent::__construct();
-		$this->load->library(array('session'));
-		$this->load->helper(array('url'));
-		$this->load->model('user_model');
+		$this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $this->output->set_header('Pragma: no-cache');
+        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        date_default_timezone_set('Asia/Kuala_Lumpur');
 
+		$this->load->model('admin/M_a_users' , 'mu');
 	}
 
 
@@ -65,7 +67,7 @@ class User extends CI_Controller {
 			$email    = $this->input->post('email');
 			$password = $this->input->post('password');
 
-			if ($this->user_model->create_user($username, $email, $password)) {
+			if ($this->mu->create_user($username, $email, $password)) {
 
 				// user creation ok
 				$this->load->view('login/header');
@@ -120,22 +122,20 @@ class User extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 
-			if ($this->user_model->resolve_user_login($username, $password)) {
+			if ($this->mu->resolve_user_login($username, $password)) {
 
-				$user_id = $this->user_model->get_user_id_from_username($username);
-				$user    = $this->user_model->get_user($user_id);
+				$user_id = $this->mu->get_user_id_from_username($username);
+				$user    = $this->mu->get_user($user_id);
 
 				// set session user datas
-				$_SESSION['user_id']      = (int)$user->id;
-				$_SESSION['username']     = (string)$user->username;
-				$_SESSION['logged_in']    = (bool)true;
-				$_SESSION['is_confirmed'] = (bool)$user->is_confirmed;
-				$_SESSION['is_admin']     = (bool)$user->is_admin;
+				$_SESSION['user_id']      = $this->mf->en($user->us_id);
+				$_SESSION['username']     = $this->mf->en($user->us_username);
+				$_SESSION['confirmed'] = $this->mf->en($user->us_verify);
+				$_SESSION['ul_id']     = $this->mf->en($user->ul_id);
+				$_SESSION['type'] = $this->mf->en('admin');
 
 				// user login ok
-				$this->load->view('login/header');
-				$this->load->view('login/user/login/login_success', $data);
-				$this->load->view('login/footer');
+				redirect(site_url('admin/A_user/login2'));
 
 			} else {
 
@@ -161,29 +161,16 @@ class User extends CI_Controller {
 	 */
 	public function logout() {
 
-		// create the data object
-		$data = new stdClass();
+			$this->session->sess_destroy();
+			redirect(site_url($this->site));
 
-		if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+	}
 
-			// remove session datas
-			foreach ($_SESSION as $key => $value) {
-				unset($_SESSION[$key]);
-			}
-
-			// user logout ok
-			$this->load->view('login/header');
-			$this->load->view('login/user/logout/logout_success', $data);
-			$this->load->view('login/footer');
-
-		} else {
-
-			// there user was not logged in, we cannot logged him out,
-			// redirect him to site root
-			redirect('/');
-
-		}
-
+	public function login2()
+	{
+		$this->load->view('login/header');
+		$this->load->view('login/user/login/login_success');
+		$this->load->view('login/footer');
 	}
 
 }

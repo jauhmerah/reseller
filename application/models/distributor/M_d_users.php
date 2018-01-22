@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @extends CI_Model
  */
-class User_model extends CI_Model {
+class M_d_users extends CI_Model {
 
 	/**
 	 * __construct function.
@@ -33,9 +33,9 @@ class User_model extends CI_Model {
 	public function create_user($username, $email, $password) {
 
 		$data = array(
-			'us_username'   => $username,
-			'us_email'      => $email,
-			'us_password'   => $this->my_func->en($password),
+			'di_username'   => $username,
+			'di_email'      => $email,
+			'di_password'   => $this->my_func->en($password),
 		);
 
 		return $this->db->insert('users', $data);
@@ -52,13 +52,20 @@ class User_model extends CI_Model {
 	 */
 	public function resolve_user_login($username, $password) {
 
-		$this->db->select('us_password');
+		$this->db->select('di_password');
 		$this->db->from('users');
-		$this->db->where('us_username', $username);
-		$hash = $this->db->get()->row('us_password');
-
-		return $this->verify_password_hash($password, $hash);
-
+		$this->db->where('di_username', $username);
+		$pass = $this->db->get()->row('di_password');
+		if ($pass) {
+			$pass = $this->mf->de($pass);
+		}else{
+			return FALSE;
+		}
+		if ($pass === $password) {
+			return TRUE;
+		}else{
+			return FALSE;
+		}
 	}
 
 	/**
@@ -70,11 +77,11 @@ class User_model extends CI_Model {
 	 */
 	public function get_user_id_from_username($username) {
 
-		$this->db->select('us_id');
+		$this->db->select('di_id');
 		$this->db->from('users');
-		$this->db->where('us_username', $username);
+		$this->db->where('di_username', $username);
 
-		return $this->db->get()->row('us_id');
+		return $this->db->get()->row('di_id');
 
 	}
 
@@ -88,35 +95,8 @@ class User_model extends CI_Model {
 	public function get_user($user_id) {
 
 		$this->db->from('users');
-		$this->db->where('us_id', $user_id);
+		$this->db->where('di_id', $user_id);
 		return $this->db->get()->row();
-
-	}
-
-	/**
-	 * hash_password function.
-	 *
-	 * @access private
-	 * @param mixed $password
-	 * @return string|bool could be a string on success, or bool false on failure
-	 */
-	private function hash_password($password) {
-
-		return password_hash($password, PASSWORD_BCRYPT);
-
-	}
-
-	/**
-	 * verify_password_hash function.
-	 *
-	 * @access private
-	 * @param mixed $password
-	 * @param mixed $hash
-	 * @return bool
-	 */
-	private function verify_password_hash($password, $hash) {
-
-		return password_verify($password, $hash);
 
 	}
 

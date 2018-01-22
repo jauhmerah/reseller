@@ -8,7 +8,7 @@
 	        $this->obj =& get_instance();
 		}
 
-		public function en_cus($text){
+		public function en($text){
 			$ci = $this->obj;
 			$ci->load->library("encrypt");
 			$val1 = $ci->encrypt->encode($text);
@@ -28,7 +28,7 @@
 			return $text ;
 		}
 
-		public function de_cus($text){
+		public function de($text){
 			$ci = $this->obj;
 			$ci->load->library("encrypt");
 			//$key2 = "6a214fde6c1f8c84902a5576bbe98834623913cc";
@@ -50,7 +50,7 @@
 			return $val2;
 		}
 
-		public function en($text , $mode = 0)
+		public function en_cus($text , $mode = 0)
 	    {
 	      if ($mode === 0) {
 	        return bin2hex($text);
@@ -60,7 +60,7 @@
 	      $defaultKey = 'mf$=0&aXAdw_"M:';
 	      return $ci->encrypt->encode($text , $defaultKey);
 	    }
-	    public function de($text , $mode = 0)
+	    public function de_cus($text , $mode = 0)
 	    {
 	      if ($mode === 0) {
 	        return pack("H*" , $text);
