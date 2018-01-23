@@ -1,66 +1,59 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Login <?= title; ?></title>
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Site title</title>
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="author" content="">
-
-	<!-- css -->
-	<link href="<?= base_url('asset/css/bootstrap.min.css') ?>" rel="stylesheet">
-	<link href="<?= base_url('asset/css/style.css') ?>" rel="stylesheet">
-
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="<?php echo base_url();?>asset/login/Login_v10/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/css/util.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>asset/login/Login_v10/css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-
-	<header id="site-header">
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="<?= base_url() ?>">Site title</a>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<?php
-							$ctrl = '';
-							if ($this->uri->segment(1)) {
-								$ctrl = $this->uri->segment(1).'/';
-							}
-						?>
-						<?php if (isset($_SESSION['username'])) : ?>
-							<li><a href="<?= base_url($ctrl.'logout') ?>">Logout</a></li>
-						<?php else : ?>
-							<li><a href="<?= base_url($ctrl.'register') ?>">Register</a></li>
-							<li><a href="<?= base_url($ctrl.'login') ?>">Login</a></li>
-						<?php endif; ?>
-					</ul>
-				</div><!-- .navbar-collapse -->
-			</div><!-- .container-fluid -->
-		</nav><!-- .navbar -->
-	</header><!-- #site-header -->
-
-	<main id="site-content" role="main">
-
-		<?php if (isset($_SESSION)) : ?>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<?php var_dump($_SESSION); ?>
-					</div>
-				</div><!-- .row -->
-			</div><!-- .container -->
-		<?php endif; ?>
+	<?php
+	$msg = "";
+		if ($this->session->flashdata('success')) {
+			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
+			// TODO: sambung sini dong
+		}if ($this->session->flashdata('warning')) {
+			$msg .= '<div class="login100-form alert alert-warning" style="display : none;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warning : '.$this->session->flashdata('warning').' </div>';
+		}if ($this->session->flashdata('info')) {
+			?>
+			<div class="login100-form alert alert-info" style="display : none;"><i class="fa fa-info" aria-hidden="true"></i> Info : <?= $this->session->flashdata('info'); ?></div>
+			<?php
+			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
+		}if ($this->session->flashdata('default')) {
+			?>
+			<div class="login100-form alert alert-default" style="display : none;"><i class="fa fa-hashtag" aria-hidden="true"></i> Note : <?= $this->session->flashdata('default'); ?></div>
+			<?php
+			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
+		}if ($this->session->flashdata('primary')) {
+			?>
+			<div class="login100-form alert alert-primary" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Information : <?= $this->session->flashdata('primary'); ?></div>
+			<?php
+			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
+		}if ($this->session->flashdata('danger')) {
+			?>
+			<div class="login100-form alert alert-danger" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Error : <?= $this->session->flashdata('danger'); ?></div>
+			<?php
+			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
+		}
+	?>

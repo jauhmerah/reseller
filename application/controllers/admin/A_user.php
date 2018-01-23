@@ -12,7 +12,7 @@ class A_user extends CI_Controller {
 	 * @access public
 	 * @return void
 	 */
-	var $parent_page = 'admin/user';
+	var $parent_page = 'login/admin';
 	public function __construct() {
 
 		parent::__construct();
@@ -97,60 +97,40 @@ class A_user extends CI_Controller {
 	 * @return void
 	 */
 	public function login() {
-
-		// create the data object
-		$data = new stdClass();
-
-		// load form helper and validation library
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
-		// set validation rules
-		$this->form_validation->set_rules('username', 'Username', 'required|alpha_numeric');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-
-		if ($this->form_validation->run() == false) {
-
-			// validation not ok, send validation errors to the view
-			$this->load->view('login/header');
-			$this->load->view('login/user/login/login');
-			$this->load->view('login/footer');
-
-		} else {
-
-			// set variables from the form
+		if ($this->input->post('username') && $this->input->post('password')) {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
+			$result = $this->mu->resolve_user_login($username, $password);
+			switch ($result) {
+				case '0':
+                    // Username Not found;
+					$this->session->set_flashdata('warning' , 'Username not found');
+					break;
+				case '1':
+					$this->session->set_flashdata('danger' , 'Password Wrong...');
+					break;
+				case '2':
+					$user_id = $this->mu->get_user_id_from_username($username);
+					$user    = $this->mu->get_user($user_id);
 
-			if ($this->mu->resolve_user_login($username, $password)) {
-
-				$user_id = $this->mu->get_user_id_from_username($username);
-				$user    = $this->mu->get_user($user_id);
-
-				// set session user datas
-				$_SESSION['user_id']      = $this->mf->en($user->us_id);
-				$_SESSION['username']     = $this->mf->en($user->us_username);
-				$_SESSION['confirmed'] = $this->mf->en($user->us_verify);
-				$_SESSION['ul_id']     = $this->mf->en($user->ul_id);
-				$_SESSION['type'] = $this->mf->en('admin');
-
-				// user login ok
-				redirect(site_url('admin/A_user/login2'));
-
-			} else {
-
-				// login failed
-				$data->error = 'Wrong username or password.';
-
-				// send error to the view
-				$this->load->view('login/header');
-				$this->load->view('login/user/login/login', $data);
-				$this->load->view('login/footer');
-
+					// set session user datas
+					$_SESSION['user_id']      = $this->mf->en($user->us_id);
+					$_SESSION['username']     = $this->mf->en($user->us_username);
+					$_SESSION['confirmed'] = $this->mf->en($user->us_verify);
+					$_SESSION['ul_id']     = $this->mf->en($user->ul_id);
+					$_SESSION['type'] = $this->mf->en('admin');
+					break;
 			}
-
+			if ($result == 2) {
+				redirect(site_url('admin/dashboard') , 'refresh');
+			}else{
+				redirect(site_url('admin') , 'refresh');
+			}
+		}else{
+			$this->load->view('login/header');
+			$this->load->view($this->parent_page."/Vlogin_admin");
+			$this->load->view('login/footer');
 		}
-
 	}
 
 	/**
@@ -161,8 +141,13 @@ class A_user extends CI_Controller {
 	 */
 	public function logout() {
 
-			$this->session->sess_destroy();
-			redirect(site_url($this->site));
+			$sessData = $this->session->all_userdata();
+			foreach ($sessData as $key) {
+				$this->session->unset_userdata($key);
+			}
+			unset($sessData);
+			$this->session->set_flashdata('success' , 'Log Out Done....');
+			redirect(site_url('admin') ,'refresh');
 
 	}
 

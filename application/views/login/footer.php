@@ -1,13 +1,30 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-	</main><!-- #site-content -->
+<div id="dropDownSelect1"></div>
 
-	<footer id="site-footer" role="contentinfo">
-	</footer><!-- #site-footer -->
-
-	<!-- js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="<?= base_url('asset/js/bootstrap.min.js') ?>"></script>
-	<script src="<?= base_url('asset/js/script.js') ?>"></script>
 
 </body>
+<footer>
+	<!--===============================================================================================-->
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/bootstrap/js/popper.js"></script>
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/daterangepicker/moment.min.js"></script>
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script src="<?php echo base_url();?>asset/login/Login_v10/js/main.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$( "div.alert" ).delay( 300 ).slideDown( 400 ).delay( 2500 ).slideUp( 400 );
+		});
+	</script>
+
+</footer>
 </html>

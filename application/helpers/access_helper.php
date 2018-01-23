@@ -19,21 +19,29 @@ if (! function_exists('checkSession'))
     {
         $ci =& get_instance();
         if ($ctrl != NULL) {
-            if ($ci->session->userdata('type')) {
+            if ($ci->session->userdata('type') && $ci->session->userdata('user_id') && $ci->session->userdata('username')) {
                 $type = $ci->session->userdata('type');
-                $type = $ci->mf->en($type);
+                $type = $ci->mf->de($type);
                 $user_id = $ci->session->userdata('user_id');
-                $username = $ci->session->userdata('username');                
+                $username = $ci->session->userdata('username');
+                $user_id = $ci->session->userdata('user_id');
+                $username = $ci->mf->de($username);
+                $user_id = $ci->mf->de($user_id);
                 switch ($type) {
                     case 'admin':
                         // has ul_id
-                        $ci->load->model('admin/M_a_users' , 'mu');
+                        $ci->load->model('admin/M_a_users' , 'mau');
                         $ul_id = $ci->session->userdata('ul_id');
-                        if ($ci->mu->) {
-                            # code...
+                        if ($ci->mau->getUsername($user_id , $username)) {
+                            return TRUE;
+                        }else{
+                            $sesData = $ci->session->all_userdata();
+                            foreach ($sesData as $key) {
+                                $ci->session->unset_userdata($key);
+                            }
+                            $ci->session->set_flashdata('warning' , 'Ops! wrong session data. Please Login Again.');
+                            //redirect(site_url('admin'), 'refresh');
                         }
-
-                        # code...
                         break;
                     case 'distributor':
                     // TODO:
@@ -48,10 +56,6 @@ if (! function_exists('checkSession'))
                         break;
                 }
             }
-            $ci->mf->de();
-            echo "<pre>";
-            print_r($ci->session->all_userdata());
-            echo "</pre>";
         }else{
             redirect(site_url() , 'refresh');
         }

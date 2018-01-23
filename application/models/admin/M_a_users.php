@@ -59,12 +59,12 @@ class M_a_users extends CI_Model {
 		if ($pass) {
 			$pass = $this->mf->de($pass);
 		}else{
-			return FALSE;
+			return 0;
 		}
 		if ($pass === $password) {
-			return TRUE;
+			return 2;
 		}else{
-			return FALSE;
+			return 1;
 		}
 	}
 
@@ -89,9 +89,21 @@ class M_a_users extends CI_Model {
 	{
 		if ($us_id != NULL) {
 			$this->db->select('us_username');
-			$this->db->from('user');
+			$this->db->from('users');
 			$this->db->where('us_id', $us_id);
 			$result = $this->db->get()->row();
+			if ($username == NULL) {
+				return $result;
+			}else{
+				if (sizeof($result) == 0) {
+					return FALSE;
+				}				
+				if ($username == $result->us_username) {
+					return TRUE;
+				}else{
+					return FALSE;
+				}
+			}
 		}else{
 			return FALSE;
 		}
