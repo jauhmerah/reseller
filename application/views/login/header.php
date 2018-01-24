@@ -28,32 +28,3 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	<?php
-	$msg = "";
-		if ($this->session->flashdata('success')) {
-			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
-			// TODO: sambung sini dong
-		}if ($this->session->flashdata('warning')) {
-			$msg .= '<div class="login100-form alert alert-warning" style="display : none;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Warning : '.$this->session->flashdata('warning').' </div>';
-		}if ($this->session->flashdata('info')) {
-			?>
-			<div class="login100-form alert alert-info" style="display : none;"><i class="fa fa-info" aria-hidden="true"></i> Info : <?= $this->session->flashdata('info'); ?></div>
-			<?php
-			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
-		}if ($this->session->flashdata('default')) {
-			?>
-			<div class="login100-form alert alert-default" style="display : none;"><i class="fa fa-hashtag" aria-hidden="true"></i> Note : <?= $this->session->flashdata('default'); ?></div>
-			<?php
-			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
-		}if ($this->session->flashdata('primary')) {
-			?>
-			<div class="login100-form alert alert-primary" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Information : <?= $this->session->flashdata('primary'); ?></div>
-			<?php
-			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
-		}if ($this->session->flashdata('danger')) {
-			?>
-			<div class="login100-form alert alert-danger" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Error : <?= $this->session->flashdata('danger'); ?></div>
-			<?php
-			$msg .= '<div class="login100-form alert alert-success" style="display : none;"><i class="fa fa-check" aria-hidden="true"></i> Success : '.$this->session->flashdata('success').' </div>';
-		}
-	?>

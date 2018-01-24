@@ -22,7 +22,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$( "div.alert" ).delay( 300 ).slideDown( 400 ).delay( 2500 ).slideUp( 400 );
+			$( "div.alert" ).delay( 300 ).slideDown( 400 ).delay( 3000 ).slideUp( 400 );
 		});
 	</script>
 
