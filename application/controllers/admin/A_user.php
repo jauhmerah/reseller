@@ -23,6 +23,7 @@ class A_user extends CI_Controller {
         date_default_timezone_set('Asia/Kuala_Lumpur');
 
 		$this->load->model('admin/M_a_users' , 'mu');
+		$this->load->helper('alertMsg');
 	}
 
 
@@ -107,7 +108,7 @@ class A_user extends CI_Controller {
 					$this->session->set_flashdata('warning' , 'Username not found');
 					break;
 				case '1':
-					$this->session->set_flashdata('danger' , 'Password Wrong...');
+					$this->session->set_flashdata('danger' , 'Wrong Password ...');
 					break;
 				case '2':
 					$user_id = $this->mu->get_user_id_from_username($username);
@@ -151,11 +152,15 @@ class A_user extends CI_Controller {
 
 	}
 
-	public function login2()
+	public function forgotPass()
 	{
-		$this->load->view('login/header');
-		$this->load->view('login/user/login/login_success');
-		$this->load->view('login/footer');
+		if ($this->input->post('email')) {
+            // In an account matches that email address, you should receive an email with instructions on how to reset your password shortly.
+		}else{
+			$this->load->view('login/header');
+			$this->load->view($this->parent_page."/Vforgotpswd");
+			$this->load->view('login/footer');
+		}
 	}
 
 }

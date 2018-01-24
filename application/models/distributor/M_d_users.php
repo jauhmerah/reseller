@@ -20,6 +20,9 @@ class M_d_users extends CI_Model {
 		$this->load->database();
 
 	}
+	const TABLE_NAME = 'distributor';
+	const PRI_NAME = 'di_';
+	// NOTE: This line need to change to us_username to {??}_username in getUsername function;
 
 	/**
 	 * create_user function.
@@ -33,12 +36,12 @@ class M_d_users extends CI_Model {
 	public function create_user($username, $email, $password) {
 
 		$data = array(
-			'di_username'   => $username,
-			'di_email'      => $email,
-			'di_password'   => $this->my_func->en($password),
+			self::PRI_NAME.'username'   => $username,
+			self::PRI_NAME.'email'      => $email,
+			self::PRI_NAME.'password'   => $this->my_func->en($password),
 		);
 
-		return $this->db->insert('users', $data);
+		return $this->db->insert(self::TABLE_NAME, $data);
 
 	}
 
@@ -52,19 +55,19 @@ class M_d_users extends CI_Model {
 	 */
 	public function resolve_user_login($username, $password) {
 
-		$this->db->select('di_password');
-		$this->db->from('users');
-		$this->db->where('di_username', $username);
-		$pass = $this->db->get()->row('di_password');
+		$this->db->select(self::PRI_NAME.'password');
+		$this->db->from(self::TABLE_NAME);
+		$this->db->where(self::PRI_NAME.'username', $username);
+		$pass = $this->db->get()->row(self::PRI_NAME.'password');
 		if ($pass) {
 			$pass = $this->mf->de($pass);
 		}else{
-			return FALSE;
+			return 0;
 		}
 		if ($pass === $password) {
-			return TRUE;
+			return 2;
 		}else{
-			return FALSE;
+			return 1;
 		}
 	}
 
@@ -77,12 +80,36 @@ class M_d_users extends CI_Model {
 	 */
 	public function get_user_id_from_username($username) {
 
-		$this->db->select('di_id');
-		$this->db->from('users');
-		$this->db->where('di_username', $username);
+		$this->db->select(self::PRI_NAME.'id');
+		$this->db->from(self::TABLE_NAME);
+		$this->db->where(self::PRI_NAME.'username', $username);
 
-		return $this->db->get()->row('di_id');
+		return $this->db->get()->row(self::PRI_NAME.'id');
 
+	}
+
+	public function getUsername($us_id = NULL , $username = NULL)
+	{
+		if ($us_id != NULL) {
+			$this->db->select(self::PRI_NAME.'username');
+			$this->db->from(self::TABLE_NAME);
+			$this->db->where(self::PRI_NAME.'id', $us_id);
+			$result = $this->db->get()->row();
+			if ($username == NULL) {
+				return $result;
+			}else{
+				if (sizeof($result) == 0) {
+					return FALSE;
+				}
+				if ($username == $result->di_username) {
+					return TRUE;
+				}else{
+					return FALSE;
+				}
+			}
+		}else{
+			return FALSE;
+		}
 	}
 
 	/**
@@ -94,8 +121,8 @@ class M_d_users extends CI_Model {
 	 */
 	public function get_user($user_id) {
 
-		$this->db->from('users');
-		$this->db->where('di_id', $user_id);
+		$this->db->from(self::TABLE_NAME);
+		$this->db->where(self::PRI_NAME.'id', $user_id);
 		return $this->db->get()->row();
 
 	}

@@ -4,8 +4,8 @@
 			<div class="wrap-login100 p-t-50 p-b-90">
 				<form class="login100-form validate-form flex-sb flex-w" method="post">
 					<span class="login100-form-title p-b-51">
-						<img src="<?php echo base_url();?>asset/login/Login_v10/images/logo1.png" class="img-responsive center-block" alt="Nasty" style=width="250" height="150">
-						Login Ad<u><span style="color : #a4252d;">min</span></u>
+						<img src="<?php echo base_url();?>asset/login/Login_v10/images/logo2.png" class="img-responsive center-block" alt="Nasty" style=width="250" height="150">
+						Login <u><span style="color : #6a4417;">Sh</span>op</u>p<span style="color : #6a4417;">er</span>
 					</span>
 					<?= msg(); ?>
 					<?php
@@ -34,7 +34,7 @@
 						</div> -->
 
 						<div>
-							<a href="<?= site_url('admin/forgot'); ?>" class="txt1">
+							<a href="#" class="txt1">
 								Forgot password?
 							</a>
 						</div>

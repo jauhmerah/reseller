@@ -6,14 +6,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * @extends CI_Controller
  */
-class User extends CI_Controller {
-	/**
-	 * __construct function.
+class S_user extends CI_Controller {
+	/**	 * __construct function.
 	 *
 	 * @access public
 	 * @return void
 	 */
-	var $parent_page = 'admin/user';
+	var $parent_page = 'login/shopper';
 	public function __construct() {
 
 		parent::__construct();
@@ -23,7 +22,8 @@ class User extends CI_Controller {
         $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         date_default_timezone_set('Asia/Kuala_Lumpur');
 
-		$this->load->model('M_users' , 'mu');
+		$this->load->model('shopper/M_s_users' , 'msu');
+		$this->load->helper('alertMsg');
 	}
 
 
@@ -68,7 +68,7 @@ class User extends CI_Controller {
 			$email    = $this->input->post('email');
 			$password = $this->input->post('password');
 
-			if ($this->mu->create_user($username, $email, $password)) {
+			if ($this->msu->create_user($username, $email, $password)) {
 
 				// user creation ok
 				$this->load->view('login/header');
@@ -98,61 +98,41 @@ class User extends CI_Controller {
 	 * @return void
 	 */
 	public function login() {
-
-		// create the data object
-		$data = new stdClass();
-
-		// load form helper and validation library
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-
-		// set validation rules
-		$this->form_validation->set_rules('username', 'Username', 'required|alpha_numeric');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-
-		if ($this->form_validation->run() == false) {
-
-			// validation not ok, send validation errors to the view
-			$this->load->view('login/header');
-			$this->load->view('login/user/login/login');
-			$this->load->view('login/footer');
-
-		} else {
-
-			// set variables from the form
+		if ($this->input->post('username') && $this->input->post('password')) {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
+			$result = $this->msu->resolve_user_login($username, $password);
+			switch ($result) {
+				case '0':
+                    // Username Not found;
+					$this->session->set_flashdata('warning' , 'Username not found');
+					break;
+				case '1':
+					$this->session->set_flashdata('danger' , 'Password Wrong...');
+					break;
+				case '2':
+					$user_id = $this->msu->get_user_id_from_username($username);
+					$user    = $this->msu->get_user($user_id);
 
-			if ($this->mu->resolve_user_login($username, $password)) {
-
-				$user_id = $this->mu->get_user_id_from_username($username);
-				$user    = $this->mu->get_user($user_id);
-
-				// set session user datas
-				$_SESSION['user_id']      = $this->mf->en($user->sh_id);
-				$_SESSION['username']     = $this->mf->en($user->sh_username);
-				$_SESSION['us_confirmed'] = $this->mf->en($user->sh_verify);
-				
-				// $_SESSION['ul_id']     = $this->mf->en($user->ul_id);
-				$_SESSION['type'] = $this->mf->en('admin');
-
-				// user login ok
-				redirect(site_url('User/login2'));
-
-			} else {
-
-				// login failed
-				$data->error = 'Wrong username or password.';
-
-				// send error to the view
-				$this->load->view('login/header');
-				$this->load->view('login/user/login/login', $data);
-				$this->load->view('login/footer');
-
+					// set session user datas
+					$_SESSION['user_id']      = $this->mf->en($user->sh_id);
+					$_SESSION['username']     = $this->mf->en($user->sh_username);
+					$_SESSION['confirmed'] = $this->mf->en($user->sh_verify);
+					// NOTE: Shopper xde user level
+					//$_SESSION['ul_id']     = $this->mf->en($user->ul_id);
+					$_SESSION['type'] = $this->mf->en('shopper');
+					break;
 			}
-
+			if ($result == 2) {
+				redirect(site_url('shopper/dashboard') , 'refresh');
+			}else{
+				redirect(site_url('shopper') , 'refresh');
+			}
+		}else{
+			$this->load->view('login/header');
+			$this->load->view($this->parent_page."/Vlogin_shopper");
+			$this->load->view('login/footer');
 		}
-
 	}
 
 	/**
@@ -163,28 +143,13 @@ class User extends CI_Controller {
 	 */
 	public function logout() {
 
-		// create the data object
-		$data = new stdClass();
-
-		if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-
-			// remove session datas
-			foreach ($_SESSION as $key => $value) {
-				unset($_SESSION[$key]);
+			$sessData = $this->session->all_userdata();
+			foreach ($sessData as $key) {
+				$this->session->unset_userdata($key);
 			}
-
-			// user logout ok
-			$this->load->view('login/header');
-			$this->load->view('login/user/logout/logout_success', $data);
-			$this->load->view('login/footer');
-
-		} else {
-
-			// there user was not logged in, we cannot logged him out,
-			// redirect him to site root
-			redirect('/');
-
-		}
+			unset($sessData);
+			$this->session->set_flashdata('success' , 'Log Out Done....');
+			redirect(site_url('shopper') ,'refresh');
 
 	}
 
