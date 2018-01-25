@@ -29,10 +29,14 @@ if (! function_exists('sendEmail'))
                 $ci->email->subject($email['subject']);
                 $ci->email->message($email['msg']);
                 $ci->email->set_mailtype('html');
-                $ci->email->send();
-                return true;
+                if($ci->email->send()){
+                    return true;
+                }else{
+                    $ci->session->set_flashdata('danger' , 'Send Email Error');
+                    return FALSE;
+                }
             }else{
-                $ci->session->set_flashdata('error', 'Please set to->email');
+                $ci->session->set_flashdata('danger', 'Please set to->email');
                 return false;
             }
         }

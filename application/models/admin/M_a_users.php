@@ -126,4 +126,33 @@ class M_a_users extends CI_Model {
 
 	}
 
+	public function get($where = NULL) {
+        $this->db->select('*');
+        $this->db->from(self::TABLE_NAME);
+        if ($where !== NULL) {
+            if (is_array($where)) {
+                foreach ($where as $field=>$value) {
+                    $this->db->where($field, $value);
+                }
+            } else {
+                $this->db->where(self::PRI_INDEX, $where);
+            }
+        }
+        $result = $this->db->get()->result();
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+	public function get_user_id_from_email($email) {
+
+		$this->db->select(self::PRI_NAME.'id');
+		$this->db->from(self::TABLE_NAME);
+		$this->db->where(self::PRI_NAME.'email', $email);
+
+		return $this->db->get()->row(self::PRI_NAME.'id');
+
+	}
 }

@@ -154,8 +154,31 @@ class A_user extends CI_Controller {
 
 	public function forgotPass()
 	{
+		$this->load->model('user_setting/M_forgot_pass', 'mfp');
+		$fp_data = $this->mfp->get(4);
+		$this->load->view('login/email/V_email_forgot');
+		return ;
 		if ($this->input->post('email')) {
             // In an account matches that email address, you should receive an email with instructions on how to reset your password shortly.
+			$email = $this->input->post('email');
+			$user_id = $this->mu->get_user_id_from_email($email);
+			if($user_id){
+				$this->load->model('user_setting/M_forgot_pass', 'mfp');
+				$fp_ip = $this->input->ip_address();
+				// NOTE: person_type : M_{?}_user > model name;
+				$fp_id = $this->mfp->insert(array('person_id' => $user_id , 'person_type' => 'a' , 'fp_ip' => $fp_ip));
+				if ($fp_id) {
+					$fp_data = $this->mfp->get($fp_id);
+					$this->load->view('login/email/V_email_forgot');
+				}else{
+					$this->session->set_flashdata('danger' , 'Forgot Password Module Error : #aufp01');
+					redirect(site_url('admin/forgot'));
+				}
+			}else{
+				// NOTE: Klu xjumpo email in database.
+				$this->session->set_flashdata('danger' , 'Email not found!!!');
+				redirect(site_url('admin/forgot'));
+			}
 		}else{
 			$this->load->view('login/header');
 			$this->load->view($this->parent_page."/Vforgotpswd");

@@ -81,7 +81,6 @@ if (! function_exists('checkSession'))
                             }
                         }
                         break;
-
                     default:
                         # code...
                         break;
