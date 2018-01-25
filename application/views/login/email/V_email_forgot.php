@@ -4,7 +4,6 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 	<title>Forgot Password</title>
 </head>
 
@@ -13,11 +12,6 @@
 		<tbody>
 			<tr>
 				<td>
-					<!--[if (gte mso 9)|(IE)]>
-      <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td>
-    <![endif]-->
 					<table bgcolor="#ffffff" class="content" align="center" cellpadding="0" cellspacing="0" border="0">
 						<tbody>
 							<tr>
@@ -43,10 +37,17 @@
 													<p>
 														To choose a new password and complete your request, please follow the link below:
 													</p>
-													<p><strong>
-														asdfsadf
-													</strong></p>
-
+													<?php
+													$link = site_url('forgot?k=');
+													?>
+													<p style="text-align:center;">
+														<a href="<?= $link; ?>"><button type="button" >
+															Reset Password
+														</button></a>
+													</p>
+													<p style="text-align:center;">
+														<?= $link; ?>
+													</p>
 													<br><br> If it is not clickable, please copy and paste the URL into your browser's address bar.
 												</td>
 											</tr>
@@ -69,7 +70,6 @@
 																<td align="left" valign="top" mc:edit="footer_sig" style="margin:0;padding-top:10px;line-height:1;">
 																	<h4><strong>Nasty It Team</strong></h4>
 																	<h5>Nasty Reseller 2.0</h5>
-																	<h5>Nsty Worldwide Sdn Bhd.</h5>
 																</td>
 															</tr>
 														</tbody>
@@ -88,12 +88,11 @@
 											<tr>
 												<td valign="top" width="100%" mc:edit="footer_unsubscribe">
 													<p style="text-align:center;">
-														<img src="<?php echo Base_url();?>Assets/Login_v10/images/" style="max-width:50px;margin:0 auto 0 auto;display:inline-block;">
+														<img src="<?php echo Base_url('asset/logo/nasty Favicon.png');?>" style="max-width:50px;margin:0 auto 0 auto;display:inline-block;">
 													</p>
-													<h6 style="text-align:center;margin-top: 9px;">COG Inc</h6>
-													<h6 style="text-align:center;">589​ Howard​ Street​</h6>
-													<h6 style="text-align:center;">San Francisco,​ CA​ 94105​</h6>
-													<h6 style="text-align:center;margin-top: 7px;"><a href="http://c0185784a2b233b0db9b-d0e5e4adc266f8aacd2ff78abb166d77.r51.cf2.rackcdn.com/v1_templates/--unsubscribe--">unsubscribe</a></h6>
+													<h6 style="text-align:center;margin-top: 9px;">Nsty Worldwide Sdn Bhd</h6>
+													<h6 style="text-align:center;">139, Tingkat 1 , Jalan Besar Tampin,</h6>
+													<h6 style="text-align:center;">73000 Tampin , N. Sembilan</h6>
 												</td>
 											</tr>
 										</tbody>

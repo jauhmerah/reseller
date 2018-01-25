@@ -93,6 +93,31 @@
 	        $this->db->delete(self::TABLE_NAME, $where);
 	        return $this->db->affected_rows();
 	    }
+
+		public function getForgot($where = NULL , $fp_date = NULL) {
+	        $this->db->select('fp.* , ');
+	        $this->db->from('forgot_pass fp');
+	        if ($where !== NULL) {
+	            if (is_array($where)) {
+	                foreach ($where as $field=>$value) {
+	                    $this->db->where($field, $value);
+	                }
+	            } else {
+	                $this->db->where(self::PRI_INDEX, $where);
+	            }
+	        }
+
+	        $result = $this->db->get()->result();
+	        if ($result) {
+	            if ($where !== NULL) {
+	                return array_shift($result);
+	            } else {
+	                return $result;
+	            }
+	        } else {
+	            return false;
+	        }
+	    }
 	}
 
 ?>
