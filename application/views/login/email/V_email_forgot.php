@@ -30,7 +30,7 @@
 										<tbody>
 											<tr>
 												<td valign="top" class="bodyContent" mc:edit="body_content">
-													<p>Hi --First Name=there--,</p>
+													<p>Hi <?= $user->username; ?>,</p>
 													<p>
 														You're receiving this email because you requested a password <mark>reset</mark> for your <strong>Nasty Reseller 2.0 Account</strong>. If you did not request this change, you can safely ignore this email.
 													</p>
@@ -38,7 +38,7 @@
 														To choose a new password and complete your request, please follow the link below:
 													</p>
 													<?php
-													$link = site_url('forgot?k=');
+													$link = site_url('forgot?k='.$this->mf->en($user->fp_id).'&key='.$this->mf->en($user->fp_date));
 													?>
 													<p style="text-align:center;">
 														<a href="<?= $link; ?>"><button type="button" >
