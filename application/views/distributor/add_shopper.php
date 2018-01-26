@@ -43,7 +43,7 @@
           <div class="card">
               <div class="card-body">    
                    
-                        <?php echo form_open_multipart('distributor/page/s12');?>
+                        <?php echo form_open_multipart('distributor/Dashboard/page/s12');?>
                             
                                 <div class="col-lg-4">
                                 <div class="card">
@@ -124,28 +124,39 @@
                                           
                                           <div  id="divUser" name="divUser">
                                                 
-                                              </div>
+                                          </div>
                                           
                                           </div>
                                           
                                         </div>
                                         <div class="line"></div>
-                                        <div class="form-group row">
-                                          <label class="col-sm-2 form-control-label">Identification Number</label>
-                                          <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="icno" id="icno" required>
-                                          </div>
-                                          <label class="col-sm-2 form-control-label">Email</label>
-                                          <div class="col-sm-4">
-                                            <input type="email" class="form-control" name="email" id="email" required placeholder="e.g : example@email.com">
-                                          </div>
-                                        </div>
+                                        
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 form-control-label">Identification Number</label>
+                                                <div class="col-sm-4">
+                                                  <input type="text" class="form-control" name="icno" id="icno" required>
+                                                </div>
+                                                
+                                            </div>
+                                        <div class="line"></div>
+                                          
+                                            <div class="form-group row" id="email1">
+                                                  <label class="col-sm-2 form-control-label">Email</label>
+                                                  <div class="col-sm-4">
+                                                      <input type="email" class="form-control" name="email" id="email" required placeholder="e.g : example@email.com">
+                                                      <div  id="divEmail" name="divEmail">
+                                                            
+                                                      </div>
+                                                  </div>
+                                            </div>
+                                        
+                                        
                                        
                                     </div>
                                   </div>
                                 </div> 
 
-                                <div class="col-lg-12">
+                                <!-- <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header d-flex align-items-center">
                                             <h2 class="h5 display display">Company Information</h2>
@@ -227,6 +238,109 @@
                                           </div>
                                         </div>
                                     </div>
+                                </div> -->
+
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-header d-flex align-items-center">
+                                            <h2 class="h5 display display">Address List</h2>
+                                        </div>
+                                          <div class="card-body">
+                                              <div class="table-responsive">
+                                                      
+                                                          <table class="table table-bordered">
+                                                              <thead>
+                                                                  <tr>
+                                                                      <th>Bil</th>
+                                                                      <th>Shopper Address</th>
+                                         
+                                                                      <th>action</th>
+
+                                                                     
+                                                                  </tr>
+                                                              </thead>
+                                                              <tbody id="addressList">
+                                                                  <tr class="list_1">
+                                                                      <td>1</td>
+                                                                      <td>
+                                                                          <div class="row">
+                                                                            <div class="col-sm-6">
+                                                                              <input type="text" class="form-control" name="company" id="company" required placeholder="Company Name">
+                                                                            </div>
+                                                                          </div>
+                                                                          <div class="row">
+
+                                                                             <div class="col-sm-12">
+                                                                                <textarea class="form-control" name="address" id="address" required placeholder="Address"></textarea>
+                                                                              </div>
+                                                                          </div>
+                                                                          
+                                                                          
+                                                                          <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                      <input type="text" class="form-control" name="postcode" id="postcode" required placeholder="Postcode No.">
+                                                                                  
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                      <input type="text" class="form-control" name="city" id="city" required placeholder="Town/City">
+                                                                                  
+                                                                                </div>
+                                                                          </div>
+                                                                          <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                  <select class="form-control" name="country" id="country" required>
+                                                                                  <option>--Select State--</option>
+                                                                                  
+                                                                                  <option value="1">Kuala Lumpur</option>
+                                                                                  <option value="2">Labuan</option>
+                                                                                  <option value="3">Putrajaya</option>
+                                                                                  <option value="4">Johor</option>
+                                                                                  <option value="5">Kedah</option>
+                                                                                  <option value="6">Kelantan</option>
+                                                                                  <option value="7">Melaka</option>
+                                                                                  <option value="8">Negeri Sembilan</option>
+                                                                                  <option value="9">Pahang</option>
+                                                                                  <option value="10">Perak</option>
+                                                                                  <option value="11">Perlis</option>
+                                                                                  <option value="12">Pulau Pinang</option>
+                                                                                  <option value="13">Sabah</option>
+                                                                                  <option value="14">Sarawak</option>
+                                                                                  <option value="15">Selangor</option>
+                                                                                  <option value="16">Terengganu</option>
+                                                                                  </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                              <div class="col-sm-6">
+                                                                                  <input type="text" class="form-control" name="phone" id="phone" required placeholder="Contact Number e.g:+60123456789">
+                                                                              </div>
+                                                                          </div>
+
+                                                                          <div class="row">
+                                                                          <div class="col-sm-12">
+                                                                              <textarea class="form-control" name="note" id="note" placeholder="Place some notes here.."></textarea>
+                                                                          </div>
+                                                                      </div>
+                                                                            
+                                                                      </td>
+                                                                      
+                                                                    
+                                          
+                                                                      <td align="center">
+                                                                            <button type="button" class="btn btn-danger delBtn1"><i class="fa fa-trash fa-md"></i></button>
+
+                                                                      </td>
+
+                                                                  </tr>
+                                                              </tbody>
+                                                           
+                                                          </table>
+                                                      
+                                                  
+                                              </div> 
+                                              <button type="button" class="btn btn-primary " id="addBtn"><i class="fa fa-plus"></i> Add New Address</button>
+                                          </div>
+                                    </div>
                                 </div>
 
                                  <div class="col-lg-12">
@@ -280,24 +394,18 @@
               </div>
           </div>
            
-          
-
-          <div class="row">
-           
-         
-
-
-          </div>
+  
         </div>
       </section>
 
 <script>
+var num =1;
 $(document).ready(function() {
 
         var $imageupload = $('.imageupload');
             $imageupload.imageupload();
         $('#username').keyup(function () {
-                      if ( ($(this).val() != "") && ($(this).val() != null) && ($(this).length != null)) 
+                      if ( ($(this).val() != "") && ($(this).val() != null) && ($(this).length != 0)) 
                       { 
                                username2 = $(this).val();
                               if ( username2.length >= 5 ) {
@@ -306,7 +414,7 @@ $(document).ready(function() {
 
                                         $.ajax({
                                         type: 'post',
-                                        url: '<?= site_url('distributor/checkUsername'); ?>',
+                                        url: '<?= site_url('distributor/dashboard/checkUsername'); ?>',
                                         dataType: 'json',
                                         cache: false,
                                         data: {username:username2},
@@ -368,6 +476,58 @@ $(document).ready(function() {
         
         });
 
+        $('#email').keyup(function () {
+              if (($(this).val() != "") && ($(this).val() != null) && ($(this).length != 0)) 
+              {
+                                      email2 = $(this).val();
+                                      
+
+                                      $.ajax({
+                                        type: 'post',
+                                        url: '<?= site_url('distributor/dashboard/checkEmail'); ?>',
+                                        dataType: 'json',
+                                        cache: false,
+                                        data: {email:email2},
+                                        success : function(result) 
+                                        {
+                                                $("#email1").prop('class', 'form-group row has-danger');
+
+                                                $("#email").prop('class', 'form-control is-invalid');
+
+                                                $("#divEmail").prop('class', 'invalid-feedback');                            
+                                      
+                                                $("#divEmail").html('The email are already been used');
+
+                                                $('#btnSubmit').attr('disabled','disabled');
+
+                                                
+                                        },
+                                        error: function (result) 
+                                        {
+                                                $("#email1").prop('class', 'form-group row has-success');
+
+                                                $("#email").prop('class', 'form-control is-valid');
+
+                                                $("#divEmail").prop('class', 'valid-feedback');                                                       
+
+                                                $("#divEmail").html('The email are available');
+
+                                                $("#btnSubmit").removeAttr('disabled');  
+                                        }
+                                      });
+              }
+              else
+              {
+                                $("#email1").prop('class', 'form-group row');
+
+                                $("#email").prop('class', 'form-control');
+
+                                $("#btnSubmit").removeAttr('disabled');
+                                
+                                $("#divEmail").html('');
+              }
+        });
+
         $('#pass1').keyup(function() {
 					if ($(this).val() == "") {
 						$("#p1").prop('class', 'form-group row');
@@ -413,6 +573,22 @@ $(document).ready(function() {
 						
 					}
 				});
+
+        $("#addBtn").click(function() {
+            
+            
+                num ++;
+                
+                $.post('<?= site_url('distributor/dashboard/getAjaxAddList') ?>', {num : num}, function(data) {
+            
+                    $("#addressList").append(data);
+               
+                });
+        });
+        $('.delBtn1').click(function() {
+				  $(".list_1").remove();
+	      });	
+
 });
 
 </script>

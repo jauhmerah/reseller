@@ -47,14 +47,20 @@
                                                         <?php 
                                                         if ($key->sh_verify == 0) 
                                                         { ?>
-                                                        <img src="<?= base_url(); ?>asset/distributor/img/verify/notverify.png" alt="">
+                                                        <img src="<?= base_url(); ?>asset/distributor/img/verify/notverify.png" alt="" width="132" height="29">
                                                         <?php    
                                                         }elseif ($key->sh_verify == 1) 
-                                                        {
-                                                            # code...
-                                                        }
+                                                        {?>
+                                                           <img src="<?= base_url(); ?>asset/distributor/img/verify/verify.png" alt="" width="132" height="40">
+                                                        <?php }
                                                         ?></td>
-													    <td></td>
+													    <td align="center">
+                                                            <button type="button" class="btn btn-success"><i class="fa fa-edit fa-md"></i></button>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <button type="button" class="btn btn-warning"><i class="fa fa-eye fa-md"></i></button>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <button type="button" class="btn btn-danger"><i class="fa fa-trash fa-md"></i></button>
+                                                        </td>
                                                         </tr>
                                                     <?php } 
                                                     }else{?>
