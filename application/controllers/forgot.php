@@ -3,8 +3,11 @@
 
 	class Forgot extends CI_Controller {
 
+		var $parent_page = 'login';
+
 	    function __construct() {
 	        parent::__construct();
+			$this->load->helper('alertMsg');
 	    }
 
 	    function index() {
@@ -18,6 +21,10 @@
 				$user = $this->mfp->getForgot($where);
 				if ($user) {
 					print_r($user);
+					echo date_default_timezone_get();
+					$this->load->view('login/header');
+					$this->load->view($this->parent_page."/admin/VchangePassword");
+					$this->load->view('login/footer');
 				}else{
 					$this->session->set_flashdata('warning' , 'Link is invalid');
 					redirect(site_url() , 'refresh');
