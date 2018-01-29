@@ -262,7 +262,7 @@ jQuery(document).ready(function() {
       debug: true,
       minChar: 6,
       onLoad: function() {
-        $('#messages').text('Start typing password');
+        $('#messagez').text('Start typing password');
       }
     },
     rules: {

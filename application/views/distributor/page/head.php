@@ -13,7 +13,7 @@
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="<?= base_url(); ?>asset/distributor/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Custom icon font-->
-    <link rel="stylesheet" href="<?= base_url(); ?>assetdistributor/css/fontastic.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>asset/distributor/css/fontastic.css">
     <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <!-- jQuery Circle-->

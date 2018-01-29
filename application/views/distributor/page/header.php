@@ -7,7 +7,7 @@
           <div class="container-fluid">
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
-                  <div class="brand-text d-none d-md-inline-block"><img src="<?= base_url(); ?>asset/distributor/img/cover/nasty_inventory.png" width="200" height="36"></div></a></div>
+                  <div class="brand-text d-none d-md-inline-block"><img src="<?= base_url(); ?>asset/distributor/img/cover/LOGO RESELLER-03.png" width="92" height="47"></div></a></div>
               <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                 <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge badge-warning">12</span></a>
                   <ul aria-labelledby="notifications" class="dropdown-menu">
@@ -34,7 +34,7 @@
                     <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong> <i class="fa fa-bell"></i>view all notifications                                            </strong></a></li>
                   </ul>
                 </li>
-                <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope"></i><span class="badge badge-info">10</span></a>
+                <li class="nav-item dropdown"> <a id="messages" rel="nofollow" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope"></i><span class="badge badge-info">10</span></a>
                   <ul aria-labelledby="notifications" class="dropdown-menu">
                     <li><a rel="nofollow" href="#" class="dropdown-item d-flex"> 
                         <div class="msg-profile"> <img src="img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"></div>
@@ -61,29 +61,31 @@
         </nav>
       </header>
 
-       <div class="row">                   
-                        <div class="col-md-12">
-                    <?php if($this->session->flashdata('success')){ ?>
+      <div class="row">                   
+             <div class="col-md-12">
+             					<?= msg(); ?>
+
+                    <!-- <?php if($this->session->flashdata('success')){ ?>
                             <div class="alert alert-success alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i> </button>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                                 <strong><i class="fa fa-check"></i>  Success!</strong> <?= $this->session->flashdata('success'); ?>
                             </div>
                     <?php } if($this->session->flashdata('warning')){
                     ?>
                             <div class="alert alert-warning alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i> </button>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                                 <strong><i class="fa fa-exclamation-triangle"></i> Warning!</strong> <?= $this->session->flashdata('warning'); ?>
                             </div>
                     <?php } if($this->session->flashdata('info')){ ?>
                             <div class="alert alert-info alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i> </button>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                                 <strong><i class="fa fa-info-circle"></i> Info!</strong> <?= $this->session->flashdata('info'); ?>
                             </div>
                     <?php } if($this->session->flashdata('error')){ ?>
                             <div class="alert alert-danger alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i> </button>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                                 <strong><i class="fa fa-times-circle-o"></i> Error!</strong> <?= $this->session->flashdata('error'); ?> 
                             </div>
-                    <?php } ?>
+                    <?php } ?> -->
                         </div>
-                    </div>
+      </div>

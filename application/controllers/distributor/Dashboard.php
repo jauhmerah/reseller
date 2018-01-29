@@ -4,8 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller{
 // Distributor Dashboard ----------
 
-var $parent_page = 'distributor';
-var $component_parent = 'distributor/page';
+	var $parent_page = 'distributor';
+	var $component_parent = 'distributor/page';
+
+	var $version = "Reseller System v1.0";
     public function __construct() {
         parent::__construct();
         $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
@@ -13,7 +15,10 @@ var $component_parent = 'distributor/page';
         $this->output->set_header('Pragma: no-cache');
         $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         date_default_timezone_set('Asia/Kuala_Lumpur');
-        $this->load->helper('access');
+		$this->load->helper('access');
+		$this->load->helper('alertMsg');
+		$this->load->helper('sendEmail');
+
         checkSession('distributor');
     }
 
@@ -27,7 +32,7 @@ var $component_parent = 'distributor/page';
 	{
     		//$this->load->library('my_func');
         	$link['link'] = $key;
-	     	$this->load->view($this->component_parent.'/head', array('ver' => $this->version) , FALSE);
+	     	$this->load->view($this->component_parent.'/head' , array('ver' => $this->version) , FALSE);
 
 	    	$this->load->view($this->component_parent.'/header', $link, FALSE);
         
@@ -68,6 +73,7 @@ var $component_parent = 'distributor/page';
 						$this->load->database();
 						$this->load->model($this->parent_page.'/m_shopper');
 						$this->load->model($this->parent_page.'/m_shopper_address');
+						$this->load->library('my_func');
 
 						$background=$this->do_upload('fileImg','./asset/distributor/img/avatar');
 		
@@ -77,30 +83,38 @@ var $component_parent = 'distributor/page';
 							'sh_icno' => $arr['icno'], 							
 							'sh_username' => $arr['username'], 
 							'sh_email' => $arr['email'],
-							'sh_password' => $arr['password'],
+							'sh_password' => $this->my_func->en($arr['password']),
 							'sh_avatar' =>  $background,
 						);
 
 						$id = $this->m_shopper->insert($arr2);
 
-						if (!empty($id)) 
-						{
+						$sizeArr = sizeof($arr['AddId']);
+						for ($i=0; $i < $sizeArr; $i++) { 
 							$arr3 = array(
 								'sh_id' => $id,
-								'sa_address' => $arr['address'],
-								'sa_tel' => $arr['phone'],
-								'sa_postcode' => $arr['postcode'],
-								'sa_city' => $arr['city'],								
-								'sa_company' => $arr['company'],
-								'sa_country' => $arr['country'],
-								'sa_note' => $arr['note'],
+								'sa_address' => $arr['address'][$i],
+								'sa_tel' => $arr['phone'][$i],
+								'sa_postcode' => $arr['postcode'][$i],
+								'sa_city' => $arr['city'][$i],								
+								'sa_company' => $arr['company'][$i],
+								'sa_country' => $arr['country'][$i],
+								'sa_note' => $arr['note'][$i],
 							 );
 
-							$this->m_shopper_address->insert($arr3);		 
+							$this->m_shopper_address->insert($arr3);		
 						}
+
+						$email['fromName'] = "Ai System";
+                        $email['fromEmail'] = "noreply@nastyjuice.com";
+                        $email['toEmail'] = ' finance@nastyjuice.com , zul@nastyjuice.com ';
+                        $email['subject'] = 'Verify your e-mail address of your reseller system account';
+                        $email['html'] = true;
 						
+						$email['msg'] = $this->load->view($this->parent_page.'/email/Vverify',$arr,true);
+						sendEmail($email);
 						$this->session->set_flashdata('success','Shopper Details are successfully added, Shopper need to verify their account first to activate their account.');
-						redirect(site_url('distributor/page/m1'),'refresh');
+						redirect(site_url('distributor/dashboard/page/m1'),'refresh');
 						
 						
 
@@ -124,7 +138,7 @@ var $component_parent = 'distributor/page';
 					$arr['total'] = $this->m_shopper->count($filter,$like);  
 					$arr['result'] = $this->m_shopper->get_curr($limit_per_page , $arr['numPage'] , $filter , $like);
 
-					$config['base_url'] = site_url('reseller/Distributor/page/m1');
+					$config['base_url'] = site_url('distributor/dashboard/page/m1');
                     $config['total_rows'] = $arr['total'];
                     $config['per_page'] = $limit_per_page;
                     $config["uri_segment"] =5;
@@ -155,7 +169,11 @@ var $component_parent = 'distributor/page';
 					$data['class'] = 'forms';
     		 		$data['display']=$this->load->view($this->parent_page.'/shopper_list',$arr,true);
                     $this->_show('display', $data, $key);
-    		 	break;
+				 break;
+				 
+				case 'verify':
+					$this->load->view($this->parent_page.'/email/Vverify',true);
+				break;
                 default:
                     $this->_show();
                 break; 

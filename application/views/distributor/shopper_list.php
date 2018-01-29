@@ -23,8 +23,8 @@
                                                         <th>#</th>
                                                         <th>Shopper Username</th>
                                                         <th>Company Name</th>
-                                                        <th>email</th>
-                                                        <th>Phone No.</th>
+                                                        <th>Identification No</th>
+                                                        <th>Email</th>
                                                         <th>Status</th>                                                        
                                                         <th>Action</th>
                                                        
@@ -41,8 +41,9 @@
                                                         <td><?= $n; ?></td>
 													    <td><?= $key->sh_username; ?></td>
 													    <td><?= $key->sa_company; ?></td>
+                                                        <td><?= $key->sa_tel; ?></td>
 													    <td><?= $key->sh_email; ?></td>
-													    <td><?= $key->sa_tel; ?></td>
+													    
 													    <td align="center">
                                                         <?php 
                                                         if ($key->sh_verify == 0) 

@@ -3,29 +3,29 @@
  <td>
     <div class="row">
             <div class="col-sm-12">
-                <input type="text" class="form-control" name="company" id="company" required placeholder="Company Name">
+                <input type="text" class="form-control" name="company[]" id="company" required placeholder="Company Name">
             </div>
     </div>
     <div class="row">
             <div class="col-sm-12">
-                <textarea class="form-control" name="address" id="address" required placeholder="Address"></textarea>
+                <textarea class="form-control" name="address[]" id="address" required placeholder="Address"></textarea>
             </div>
     </div>
                                                                           
                                                                           
     <div class="row">
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="postcode" id="postcode" required placeholder="Postcode No.">
+                <input type="text" class="form-control" name="postcode[]" id="postcode" required placeholder="Postcode No.">
                                                                                   
             </div>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="city" id="city" required placeholder="Town/City">
+                <input type="text" class="form-control" name="city[]" id="city" required placeholder="Town/City">
                                                                                   
             </div>
     </div>
     <div class="row">
             <div class="col-sm-6">
-                <select class="form-control" name="country" id="country" required>
+                <select class="form-control" name="country[]" id="country" required>
                     <option>--Select State--</option>
                                                                                   
                     <option value="1">Kuala Lumpur</option>
@@ -49,15 +49,24 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="phone" id="phone" required placeholder="Contact Number">
+                <input id="radioCustom<?= $num; ?>" type="radio" value="1" name="a[]" id="a" class="form-control-custom radio-custom" required>
+                <label for="radioCustom<?= $num; ?>">Current Address</label>
+        </div>                                                                              
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="phone[]" id="phone" required placeholder="Contact Number">
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
-            <textarea class="form-control" name="note" id="note" required></textarea>
+            <textarea class="form-control" name="note[]" id="note"></textarea>
         </div>
     </div>
+
+    <input type="hidden" name="AddId[]" id="inputAddId[]" class="form-control" value="<?= $num; ?>">
+
 </td>
 
 <td align="center">

@@ -19,7 +19,7 @@
 				<td valign="top" mc:edit="headerBrand" id="templateContainerHeader">
 
 					<p style="text-align:center;margin:0;padding:0;">
-						<img src="<?php echo Base_url();?>Assets/Login_v10/images/nasty.jpg" style="max-width:50px;display:inline-block;">
+						<img src="<?php echo Base_url();?>asset/distributor/img/verify/nasty.jpg" style="max-width:50px;display:inline-block;">
 					</p>
 
 				</td>
@@ -31,7 +31,7 @@
 							<td valign="top" class="bodyContentImageFull" mc:edit="body_content_01">
                 <br></br>
                 <p style="text-align:center;margin:0;padding:0;">
-      						<center><img src="<?php echo Base_url();?>Assets/Login_v10/images/logo4.png" style="max-width:300px;display:block;"></center>
+      						<center><img src="<?php echo Base_url();?>asset/distributor/img/verify/logo4.jpg" style="max-width:300px;display:block;"></center>
       					</p>
 							</td>
 						</tr>
@@ -44,9 +44,11 @@
 						<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateContainerMiddle">
 							<tbody><tr>
 								<td valign="top" class="bodyContent" mc:edit="body_content">
-									<p>To verify your email address, click on the verification  link in the email that you receive from Nasty Reseller</P>
-<p1>You may resend the email by clicking on the button below.</p>
-<br><br>
+                  <h2>Email Verification</h2>
+									<p>Verify your email address to complete your Nasty Reseller Account</p>
+									<p>Just click on the button below.</p>
+
+<br>
 								</td>
 							</tr>
 						</tbody></table>
@@ -59,7 +61,7 @@
 						<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateContainerMiddle">
 							<tbody><tr>
 								<td valign="top" class="bodyContentCenter" mc:edit="body_content_centered">
-                  <a class="blue-btn" href="http://blog.autopilothq.com/lead-nurturing-secrets/"><strong>Verify your email</strong></a>
+                  <a class="blue-btn" href="http://blog.autopilothq.com/lead-nurturing-secrets/"><strong>Verify Your Email</strong></a>
 								</td>
 							</tr>
 						</tbody></table>
@@ -95,7 +97,7 @@
 						<tbody><tr>
 							<td valign="top" width="100%" mc:edit="footer_unsubscribe">
 								<p style="text-align:center;">
-									<img src="<?php echo Base_url();?>Assets/Login_v10/images/nasty.jpg" style="max-width:30px;display:inline-block;">
+									<img src="<?php echo Base_url();?>asset/distributor/img/verify/nasty.jpg" style="max-width:30px;display:inline-block;">
 								</p>
 								<h6 style="text-align:center;">NSTY worldwide SDN BHD​</h6>
 								<h6 style="text-align:center;">it@nastyjuice.com.my</h6>

@@ -41,7 +41,11 @@
 
     <script src="<?= base_url(); ?>asset/distributor/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
 
-
+<script type="text/javascript">
+		$(document).ready(function() {
+			$( "div.alert" ).delay( 300 ).slideDown( 400 ).delay( 3000 ).slideUp( 400 );
+		});
+	</script>
 
 
 

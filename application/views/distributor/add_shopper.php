@@ -2,12 +2,10 @@
 
 <script src="<?= base_url(); ?>asset/distributor/dist/js/bootstrap-imageupload.js"></script>
 
-<!-- <link href="<?= base_url(); ?>asset/plugin/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet">   
-
-<script src="<?= base_url(); ?>asset/plugin/bootstrap-fileinput/bootstrap-fileinput.js"></script> -->
 
 
-<script src="<?= base_url(); ?>asset/distributor/js/strength.js"></script>
+
+
 
 
 
@@ -156,90 +154,7 @@
                                   </div>
                                 </div> 
 
-                                <!-- <div class="col-lg-12">
-                                    <div class="card">
-                                        <div class="card-header d-flex align-items-center">
-                                            <h2 class="h5 display display">Company Information</h2>
-                                        </div>
-
-                                        <div class="card-body">
-                                           <div class="form-group row">
-                                          <label class="col-sm-2 form-control-label">Company Name</label>
-                                          <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="company" id="company" required>
-                                          </div>
-                                          
-                                        </div>
-                                      
-                                        <div class="line"></div>
-
-                                     
-                                           <div class="form-group row">
-                                          <label class="col-sm-2 form-control-label">Phone</label>
-                                          <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="phone" id="phone" required placeholder="e.g : +601234567890">
-                                          </div>
-                                          
-                                        </div>
-                                      
-                                        <div class="line"></div>
-                                        <div class="form-group row">
-                                          <label class="col-sm-2 form-control-label">Address</label>
-                                          <div class="col-sm-4">
-                                            <textarea class="form-control" name="address" id="address" required></textarea>
-                                          </div>
-                                        </div>
-                                        <div class="line"></div>
-                                        <div class="form-group row">
-                                          <label class="col-sm-2 form-control-label">Postcode</label>
-                                          <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="postcode" id="postcode" required>
-                                          </div>
-                                          <label class="col-sm-2 form-control-label">Town/City</label>
-                                          <div class="col-sm-4">
-                                            <input type="text" class="form-control" name="city" id="city" required>
-                                          </div>
-                                        </div>
-                                        
-                                        <div class="line"></div>
-                                        <div class="form-group row">
-                                          <label class="col-sm-2 form-control-label">State</label>
-                                          <div class="col-sm-4">
-                                            <select class="form-control" name="country" id="country" required>
-                                            <option>--Select State--</option>
-                                            
-                                            <option value="1">Kuala Lumpur</option>
-                                            <option value="2">Labuan</option>
-                                            <option value="3">Putrajaya</option>
-                                            <option value="4">Johor</option>
-                                            <option value="5">Kedah</option>
-                                            <option value="6">Kelantan</option>
-                                            <option value="7">Melaka</option>
-                                            <option value="8">Negeri Sembilan</option>
-                                            <option value="9">Pahang</option>
-                                            <option value="10">Perak</option>
-                                            <option value="11">Perlis</option>
-                                            <option value="12">Pulau Pinang</option>
-                                            <option value="13">Sabah</option>
-                                            <option value="14">Sarawak</option>
-                                            <option value="15">Selangor</option>
-                                            <option value="16">Terengganu</option>
-                                            </select>
-                                          </div>
-                                          
-                                        </div>
-
-                                        <div class="line"></div>
-                                          <div class="form-group row">
-                                            <label class="col-sm-2 form-control-label">Note</label>
-                                            <div class="col-sm-6">
-                                              <textarea class="form-control" name="note" id="note"></textarea>
-                                            </div>
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
+      
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-header d-flex align-items-center">
@@ -265,30 +180,30 @@
                                                                       <td>
                                                                           <div class="row">
                                                                             <div class="col-sm-6">
-                                                                              <input type="text" class="form-control" name="company" id="company" required placeholder="Company Name">
+                                                                              <input type="text" class="form-control" name="company[]" id="company" required placeholder="Company Name">
                                                                             </div>
                                                                           </div>
                                                                           <div class="row">
 
                                                                              <div class="col-sm-12">
-                                                                                <textarea class="form-control" name="address" id="address" required placeholder="Address"></textarea>
+                                                                                <textarea class="form-control" name="address[]" id="address" required placeholder="Address"></textarea>
                                                                               </div>
                                                                           </div>
                                                                           
                                                                           
                                                                           <div class="row">
                                                                                 <div class="col-sm-6">
-                                                                                      <input type="text" class="form-control" name="postcode" id="postcode" required placeholder="Postcode No.">
+                                                                                      <input type="text" class="form-control" name="postcode[]" id="postcode" required placeholder="Postcode No.">
                                                                                   
                                                                                 </div>
                                                                                 <div class="col-sm-6">
-                                                                                      <input type="text" class="form-control" name="city" id="city" required placeholder="Town/City">
+                                                                                      <input type="text" class="form-control" name="city[]" id="city" required placeholder="Town/City">
                                                                                   
                                                                                 </div>
                                                                           </div>
                                                                           <div class="row">
                                                                                 <div class="col-sm-6">
-                                                                                  <select class="form-control" name="country" id="country" required>
+                                                                                  <select class="form-control" name="country[]" id="country" required>
                                                                                   <option>--Select State--</option>
                                                                                   
                                                                                   <option value="1">Kuala Lumpur</option>
@@ -310,20 +225,28 @@
                                                                                   </select>
                                                                                 </div>
                                                                             </div>
+
                                                                             <div class="row">
                                                                               <div class="col-sm-6">
-                                                                                  <input type="text" class="form-control" name="phone" id="phone" required placeholder="Contact Number e.g:+60123456789">
+                                                                                  <input id="radioCustom1" type="radio" value="1" name="a[]" id="a" class="form-control-custom radio-custom">
+                                                                                  <label for="radioCustom1">Current Address</label>
+                                                                              </div>                                                                              
+                                                                            </div>
+                                                                            <div class="row">
+                                                                              <div class="col-sm-6">
+                                                                                  <input type="text" class="form-control" name="phone[]" id="phone" required placeholder="Contact Number e.g:+60123456789">
                                                                               </div>
                                                                           </div>
 
                                                                           <div class="row">
                                                                           <div class="col-sm-12">
-                                                                              <textarea class="form-control" name="note" id="note" placeholder="Place some notes here.."></textarea>
+                                                                              <textarea class="form-control" name="note[]" id="note" placeholder="Place some notes here.."></textarea>
                                                                           </div>
                                                                       </div>
-                                                                            
-                                                                      </td>
-                                                                      
+                                                                      <input type="hidden" name="AddId[]" id="inputAddId[]" class="form-control" value="1">                                      
+      
+                                                               </td>
+                                                                        
                                                                     
                                           
                                                                       <td align="center">
@@ -397,7 +320,7 @@
   
         </div>
       </section>
-
+<script src="<?= base_url(); ?>asset/distributor/js/strength.js"></script>
 <script>
 var num =1;
 $(document).ready(function() {
