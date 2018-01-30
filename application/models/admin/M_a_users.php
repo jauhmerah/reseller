@@ -155,4 +155,12 @@ class M_a_users extends CI_Model {
 		return $this->db->get()->row(self::PRI_NAME.'id');
 
 	}
+
+	public function update(Array $data, $where = array()) {
+			if (!is_array($where)) {
+				$where = array(self::PRI_NAME.'id' => $where);
+			}
+		$this->db->update(self::TABLE_NAME, $data, $where);
+		return $this->db->affected_rows();
+	}
 }

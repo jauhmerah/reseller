@@ -7,17 +7,16 @@
 						<img src="<?php echo base_url();?>asset/login/Login_v10/images/logo1.png" class="img-responsive center-block" alt="Nasty" style=width="250" height="150">
 						Change Password Ad<u><span style="color : #a4252d;">min</span></u>
 					</span>
-					<?= msg(); ?>					
+					<?= msg(); ?>
 					<!-- alert-validate -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password un-match">
-						<input class="input100" type="password" name="pass1" id="pass1" placeholder="New Password" required>
+						<input class="input100" type="password" name="pass" id="pass1" placeholder="New Password" required>
 						<span class="focus-input100"></span>
 					</div>
 					<input type="hidden" name="key"  value="<?= $this->mf->en('reset'); ?>">
-					<input type="hidden" name="k" value="<?= $this->input->get('k'); ?>">
-					<input type="hidden" name="" value="">
+					<input type="hidden" name="fp_id" value="<?= $this->mf->en($user->fp_id); ?>">
 					<div class="wrap-input100 validate-input m-b-16" id="passv" data-validate = "Password not match">
-						<input class="input100" type="password" name="pass2" id="pass2" placeholder="Re-Password" required>
+						<input class="input100" type="password" id="pass2" placeholder="Re-Password" required>
 						<span class="focus-input100"></span>
 					</div>
 					<div class="container-login100-form-btn m-t-17">
