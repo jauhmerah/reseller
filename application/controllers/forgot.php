@@ -21,7 +21,6 @@
 				$user = $this->mfp->getForgot($where);
 				if ($user) {
 					print_r($user);
-					echo date_default_timezone_get();
 					$this->load->view('login/header');
 					$this->load->view($this->parent_page."/admin/VchangePassword");
 					$this->load->view('login/footer');

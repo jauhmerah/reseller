@@ -3,9 +3,7 @@
 
 </body>
 <footer>
-	<!--===============================================================================================-->
-	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
+	
 	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/animsition/js/animsition.min.js"></script>
 	<!--===============================================================================================-->
 	<script src="<?php echo base_url();?>asset/login/Login_v10/vendor/bootstrap/js/popper.js"></script>

@@ -2,51 +2,43 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-				<form class="login100-form validate-form flex-sb flex-w" method="post">
+				<form class="login100-form validate-form flex-sb flex-w" method="post" id="form1">
 					<span class="login100-form-title p-b-51">
 						<img src="<?php echo base_url();?>asset/login/Login_v10/images/logo1.png" class="img-responsive center-block" alt="Nasty" style=width="250" height="150">
-						Login Ad<u><span style="color : #a4252d;">min</span></u>
+						Change Password Ad<u><span style="color : #a4252d;">min</span></u>
 					</span>
-					<?= msg(); ?>
-					<?php
-					if ($this->session->userdata('user_id')) {
-						$this->session->sess_destroy();
-						echo msg('danger' , 'Your session is invalid. Please log in again.');
-					}
-					?>
-					<div class="wrap-input100 validate-input m-b-16 " data-validate = "Username is required">
-						<input class="input100" type="text" name="username" placeholder="Username">
+					<?= msg(); ?>					
+					<!-- alert-validate -->
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password un-match">
+						<input class="input100" type="password" name="pass1" id="pass1" placeholder="New Password" required>
 						<span class="focus-input100"></span>
 					</div>
-
-
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password">
+					<input type="hidden" name="key"  value="<?= $this->mf->en('reset'); ?>">
+					<input type="hidden" name="k" value="<?= $this->input->get('k'); ?>">
+					<input type="hidden" name="" value="">
+					<div class="wrap-input100 validate-input m-b-16" id="passv" data-validate = "Password not match">
+						<input class="input100" type="password" name="pass2" id="pass2" placeholder="Re-Password" required>
 						<span class="focus-input100"></span>
 					</div>
-
-					<div class="flex-sb-m w-full p-t-3 p-b-24">
-						<!-- <div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div> -->
-
-						<div>
-							<a href="<?= site_url('admin/forgot'); ?>" class="txt1">
-								Forgot password?
-							</a>
-						</div>
-					</div>
-
 					<div class="container-login100-form-btn m-t-17">
 						<button class="login100-form-btn" >
-							Login
+							Reset Password
 						</button>
 					</div>
-
 				</form>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#form1').submit(function(event) {
+				var pass1 = $('#pass1').val();
+				var pass2 = $('#pass2').val();
+				if (pass1 != pass2) {
+					$('#passv').addClass('alert-validate');
+					bootbox.alert('Password Not match');
+					event.preventDefault();
+				}
+			});
+		});
+	</script>
