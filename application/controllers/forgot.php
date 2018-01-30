@@ -50,10 +50,31 @@
 									}else{
 										$this->session->set_flashdata('danger' , 'Change user password error');
 									}
+									redirect(site_url('admin') , 'refresh');
 									break;
-
+								case 'd':
+									$this->load->model('distributor/M_d_users' , 'mdu');
+									$arr = array('di_password' => $pass);
+									if ($this->mdu->update($arr , $person_id) ){
+										$this->session->set_flashdata('success' , 'Change user password success.');
+									}else{
+										$this->session->set_flashdata('danger' , 'Change user password error');
+									}
+									redirect(site_url('distributor' , 'refresh'));
+									break;
+								case 's':
+									$this->load->model('shopper/M_s_users' , 'msu');
+									$arr = array('sh_password' => $pass);
+									if ($this->msu->update($arr , $person_id)) {
+										$this->session->set_flashdata('success' , 'Change user password success.');
+									}else{
+										$this->session->set_flashdata('danger' , 'Change user password error');
+									}
+									redirect(site_url('distributor' , 'refresh'));
+									break;
 								default:
-									# code...
+									$this->session->set_flashdata('danger' , 'User type error');
+									redirect(site_url(), 'refresh');
 									break;
 							}
 						}else{
