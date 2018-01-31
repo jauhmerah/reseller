@@ -14,8 +14,8 @@
 						echo msg('danger' , 'Your session is invalid. Please log in again.');
 					}
 					?>
-					<div class="wrap-input100 validate-input m-b-16 " data-validate = "Username is required">
-						<input class="input100" type="text" name="username" placeholder="Username">
+					<div class="wrap-input100 validate-input m-b-16 " data-validate = "Email is required">
+						<input class="input100" type="email" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
 					</div>
 

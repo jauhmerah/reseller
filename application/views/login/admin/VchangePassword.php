@@ -2,7 +2,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
-				<form class="login100-form validate-form flex-sb flex-w" method="post" id="form1">
+				<form class="login100-form validate-form flex-sb flex-w" method="post" id="form1" action="<?= site_url('forgot');?>">
 					<span class="login100-form-title p-b-51">
 						<img src="<?php echo base_url();?>asset/login/Login_v10/images/logo1.png" class="img-responsive center-block" alt="Nasty" style=width="250" height="150">
 						Change Password Ad<u><span style="color : #a4252d;">min</span></u>

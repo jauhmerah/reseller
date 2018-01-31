@@ -20,13 +20,13 @@
 				$where = array('fp.fp_id' => $fp_id , 'fp.fp_date' => $fp_date , 'fp.fp_hit' => 0);
 				$user = $this->mfp->getForgot($where);
 				if ($user) {
-					print_r($user);
+					$this->mfp->update(array('fp_hit' => 1));
 					$data['user'] = $user;
 					$this->load->view('login/header');
 					$this->load->view($this->parent_page."/admin/VchangePassword" , $data);
 					$this->load->view('login/footer');
 				}else{
-					$this->session->set_flashdata('warning' , 'Link is invalid');
+					$this->session->set_flashdata('warning' , 'This link is invalid');
 					redirect(site_url() , 'refresh');
 				}
 	        }else{

@@ -52,11 +52,11 @@ class M_a_users extends CI_Model {
 	 * @param mixed $password
 	 * @return bool true on success, false on failure
 	 */
-	public function resolve_user_login($username, $password) {
+	public function resolve_user_login($email, $password) {
 
 		$this->db->select(self::PRI_NAME.'password');
 		$this->db->from(self::TABLE_NAME);
-		$this->db->where(self::PRI_NAME.'username', $username);
+		$this->db->where(self::PRI_NAME.'email', $email);
 		$pass = $this->db->get()->row(self::PRI_NAME.'password');
 		if ($pass) {
 			$pass = $this->mf->de($pass);
@@ -82,6 +82,15 @@ class M_a_users extends CI_Model {
 		$this->db->select(self::PRI_NAME.'id');
 		$this->db->from(self::TABLE_NAME);
 		$this->db->where(self::PRI_NAME.'username', $username);
+
+		return $this->db->get()->row(self::PRI_NAME.'id');
+
+	}
+	public function get_user_id_from_email($email) {
+
+		$this->db->select(self::PRI_NAME.'id');
+		$this->db->from(self::TABLE_NAME);
+		$this->db->where(self::PRI_NAME.'email', $email);
 
 		return $this->db->get()->row(self::PRI_NAME.'id');
 
@@ -145,16 +154,6 @@ class M_a_users extends CI_Model {
             return false;
         }
     }
-
-	public function get_user_id_from_email($email) {
-
-		$this->db->select(self::PRI_NAME.'id');
-		$this->db->from(self::TABLE_NAME);
-		$this->db->where(self::PRI_NAME.'email', $email);
-
-		return $this->db->get()->row(self::PRI_NAME.'id');
-
-	}
 
 	public function update(Array $data, $where = array()) {
 			if (!is_array($where)) {
