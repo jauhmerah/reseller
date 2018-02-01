@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('session' , 'my_func' => 'mf');
+$autoload['libraries'] = array('session' , 'my_func' => 'mf' , 'timezone');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','form','html','text','string','file');
+$autoload['helper'] = array('url' ,'alertMsg','form','html','text','string','file');
 
 /*
 | -------------------------------------------------------------------

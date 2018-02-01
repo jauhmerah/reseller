@@ -94,8 +94,23 @@
 	        return $this->db->affected_rows();
 	    }
 
-		public function getForgot($where = NULL , $fp_date = NULL) {
-	        $this->db->select('fp.* , ');
+		public function getForgot($where = NULL , $fp_date = NULL , $type = NULL) {
+	        $this->db->select('fp.*');
+			switch ($type) {
+				case 'a':
+					$this->db->select('us.us_username as username , us.us_email as email');
+					$this->db->join('users us', 'us.us_id = fp.person_id', 'left');
+					break;
+				case 'd':
+					$this->db->select('di.di_username as username, di.di_email as email');
+					$this->db->join('distributor di', 'table.column = fp.person_id', 'left');
+					break;
+				case 's':
+					$this->db->select('sh.sh_username as username , sh.sh_email as email');
+					$this->db->join('shopper sh', 'sh.sh_id = fp.person_id', 'left');
+					break;
+
+			}
 	        $this->db->from('forgot_pass fp');
 	        if ($where !== NULL) {
 	            if (is_array($where)) {

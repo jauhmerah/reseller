@@ -14,14 +14,7 @@ class A_user extends CI_Controller {
 	 */
 	var $parent_page = 'login/admin';
 	public function __construct() {
-
 		parent::__construct();
-		$this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
-        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-        $this->output->set_header('Pragma: no-cache');
-        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-        date_default_timezone_set('Asia/Kuala_Lumpur');
-
 		$this->load->model('admin/M_a_users' , 'mu');
 		$this->load->helper('alertMsg');
 	}
@@ -155,8 +148,8 @@ class A_user extends CI_Controller {
 	public function forgotPass()
 	{
 		$this->load->model('user_setting/M_forgot_pass', 'mfp');
-		$fp_data = $this->mfp->get(4);
-		$this->load->view('login/email/V_email_forgot');
+		$data['user'] = $this->mfp->getForgot(4 , NULL , 'a');
+		$this->load->view('login/email/V_email_forgot'  , $data);
 		return ;
 		if ($this->input->post('email')) {
             // In an account matches that email address, you should receive an email with instructions on how to reset your password shortly.
@@ -168,7 +161,7 @@ class A_user extends CI_Controller {
 				// NOTE: person_type : M_{?}_user > model name;
 				$fp_id = $this->mfp->insert(array('person_id' => $user_id , 'person_type' => 'a' , 'fp_ip' => $fp_ip));
 				if ($fp_id) {
-					$fp_data = $this->mfp->get($fp_id);
+					$fp_data = $this->mfp->getForgot($fp_id);
 					$this->load->view('login/email/V_email_forgot');
 				}else{
 					$this->session->set_flashdata('danger' , 'Forgot Password Module Error : #aufp01');
