@@ -32,7 +32,7 @@ class A_user extends CI_Controller {
 	 * @access public
 	 * @return void
 	 */
-	public function register() {
+	/*public function register() {
 
 		// create the data object
 		$data = new stdClass();
@@ -82,7 +82,7 @@ class A_user extends CI_Controller {
 
 		}
 
-	}
+	}*/
 
 	/**
 	 * login function.
@@ -91,20 +91,20 @@ class A_user extends CI_Controller {
 	 * @return void
 	 */
 	public function login() {
-		if ($this->input->post('username') && $this->input->post('password')) {
-			$username = $this->input->post('username');
+		if ($this->input->post('email') && $this->input->post('password')) {
+			$email = $this->input->post('email');
 			$password = $this->input->post('password');
-			$result = $this->mu->resolve_user_login($username, $password);
+			$result = $this->mu->resolve_user_login($email, $password);
 			switch ($result) {
 				case '0':
                     // Username Not found;
-					$this->session->set_flashdata('warning' , 'Username not found');
+					$this->session->set_flashdata('warning' , 'Email not found');
 					break;
 				case '1':
 					$this->session->set_flashdata('danger' , 'Wrong Password ...');
 					break;
 				case '2':
-					$user_id = $this->mu->get_user_id_from_username($username);
+					$user_id = $this->mu->get_user_id_from_email($email);
 					$user    = $this->mu->get_user($user_id);
 
 					// set session user datas
@@ -147,12 +147,7 @@ class A_user extends CI_Controller {
 
 	public function forgotPass()
 	{
-		$this->load->model('user_setting/M_forgot_pass', 'mfp');
-		$data['user'] = $this->mfp->getForgot(4 , NULL , 'a');
-		$this->load->view('login/email/V_email_forgot'  , $data);
-		return ;
 		if ($this->input->post('email')) {
-            // In an account matches that email address, you should receive an email with instructions on how to reset your password shortly.
 			$email = $this->input->post('email');
 			$user_id = $this->mu->get_user_id_from_email($email);
 			if($user_id){
@@ -161,8 +156,14 @@ class A_user extends CI_Controller {
 				// NOTE: person_type : M_{?}_user > model name;
 				$fp_id = $this->mfp->insert(array('person_id' => $user_id , 'person_type' => 'a' , 'fp_ip' => $fp_ip));
 				if ($fp_id) {
-					$fp_data = $this->mfp->getForgot($fp_id);
-					$this->load->view('login/email/V_email_forgot');
+					$data['user'] = $this->mfp->getForgot($fp_id , 'a');
+					$msg = $this->load->view('login/email/V_email_forgot' , $data , TRUE);
+					$this->load->helper('sendEmail');
+					// CHANGED: change sendEmail2 to sendEmail;
+					if (sendEmail2($email , 'Reset Password' , $msg)) {
+						$this->session->set_flashdata('success' , 'Sending reset email to '.$email.' done.');
+					}
+					redirect(site_url('admin') , 'refresh');
 				}else{
 					$this->session->set_flashdata('danger' , 'Forgot Password Module Error : #aufp01');
 					redirect(site_url('admin/forgot'));

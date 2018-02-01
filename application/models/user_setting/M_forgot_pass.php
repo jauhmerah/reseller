@@ -94,7 +94,7 @@
 	        return $this->db->affected_rows();
 	    }
 
-		public function getForgot($where = NULL , $fp_date = NULL , $type = NULL) {
+		public function getForgot($where = NULL , $type = NULL) {
 	        $this->db->select('fp.*');
 			switch ($type) {
 				case 'a':
