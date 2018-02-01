@@ -73,6 +73,8 @@ class M_shopper extends CI_Model {
     		}
         }
 
+        $this->db->where('sa.sa_current',1);
+
         return $this->db->get()->result();
 
 
@@ -105,6 +107,8 @@ class M_shopper extends CI_Model {
     			$this->db->like($like);
     		}
         }
+        $this->db->where('sa.sa_current',1);
+        
         return $this->db->count_all_results();
 
     }

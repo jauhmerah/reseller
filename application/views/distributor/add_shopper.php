@@ -1,7 +1,8 @@
 <link href="<?= base_url(); ?>asset/distributor/dist/css/bootstrap-imageupload.css" rel="stylesheet">
-
+<link rel="stylesheet" href="<?= base_url(); ?>asset/distributor/plugin/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css">
 <script src="<?= base_url(); ?>asset/distributor/dist/js/bootstrap-imageupload.js"></script>
-
+<script src="<?= base_url(); ?>asset/distributor/plugin/bootstrap-switch-master/dist/js/bootstrap-switch.js"></script>
+<script src="<?= base_url(); ?>asset/distributor/plugin/bootbox/bootbox.min.js"></script>
 
 
 
@@ -41,7 +42,7 @@
           <div class="card">
               <div class="card-body">    
                    
-                        <?php echo form_open_multipart('distributor/Dashboard/page/s12');?>
+                        <?php echo form_open_multipart('distributor/Dashboard/page/s12','id="submit_form"');?>
                             
                                 <div class="col-lg-4">
                                 <div class="card">
@@ -225,12 +226,14 @@
                                                                                   </select>
                                                                                 </div>
                                                                             </div>
-
+                                                                            
                                                                             <div class="row">
-                                                                              <div class="col-sm-6">
-                                                                                  <input id="radioCustom1" type="radio" value="1" name="a[]" id="a" class="form-control-custom radio-custom">
-                                                                                  <label for="radioCustom1">Current Address</label>
-                                                                              </div>                                                                              
+                                                                              
+                                                                               <div class="col-sm-4 i-checks">
+                                                                                            <input id="checkboxCustom0" type="checkbox" class="rad form-control-custom" name="cu[0]" id="cu" value=true>
+                                                                                            <label for="checkboxCustom0">Mark as my current address</label>
+                                                                              </div>   
+                                                                                                                                                            
                                                                             </div>
                                                                             <div class="row">
                                                                               <div class="col-sm-6">
@@ -281,6 +284,9 @@
                                                 
                                               </div>
                                               <div class="pwstrength_viewport_progress"></div>
+                                              <div class="invalid-feedback" id="divError1" name="divError1">
+                                               
+                                              </div>
                                             </div>
                                           </div>
                                         <div class="line"></div>
@@ -303,8 +309,8 @@
                                        <div class="line"></div>
                                           <div class="form-group row">
                                             <div class="col-sm-4 offset-sm-2">
-                                              <button type="submit" class="btn btn-secondary">Cancel</button>
-                                              <button type="submit" class="btn btn-primary" id="btnSubmit">Save changes</button>
+                                              <button type="button" class="btn btn-secondary">Cancel</button>
+                                              <button type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit">Save changes</button>
                                             </div>
                                           </div>
                                        
@@ -322,11 +328,24 @@
       </section>
 <script src="<?= base_url(); ?>asset/distributor/js/strength.js"></script>
 <script>
-var num =1;
+var num =0;
 $(document).ready(function() {
 
-        var $imageupload = $('.imageupload');
+            var $imageupload = $('.imageupload');
             $imageupload.imageupload();
+
+        $('#submit_form').submit(function (e) {
+            if ($("input[type=checkbox]:checked").length === 0) {
+                e.preventDefault();
+                bootbox.alert("Please select your current address");
+
+                return false;
+            }
+            else{
+                return true;
+            }
+        });
+
         $('#username').keyup(function () {
                       if ( ($(this).val() != "") && ($(this).val() != null) && ($(this).length != 0)) 
                       { 
@@ -457,14 +476,35 @@ $(document).ready(function() {
 						$("#pass2").val("");
 						$("#p2").prop('class', 'form-group row');
 						$("#btnSubmit").removeAttr('disabled');
-					}else{
-						$("#p1").prop('class', 'form-group row has-danger');
+					}
+         
+          else{
+              
+              if ($(this).val().length < 6) 
+              {
+                  $("#p1").prop('class', 'form-group row has-danger');
             
-            $("#pass1").prop('class', 'form-control is-invalid');
-            $("#p2").prop('class', 'form-group row has-danger');
+                  $("#pass1").prop('class', 'form-control is-invalid');
+                  $("#p2").prop('class', 'form-group row has-danger');
+                  
+                  $("#pass2").prop('class', 'form-control is-invalid');
+                  $("#btnSubmit").prop('disabled', 'disabled');
+                  $("#divError1").html('The passwords must be more than 6 character');
+                  
+              }
+              else
+              {
+                  $("#p1").prop('class', 'form-group row has-danger');
             
-						$("#pass2").prop('class', 'form-control is-invalid');
-						$("#btnSubmit").prop('disabled', 'disabled');
+                  $("#pass1").prop('class', 'form-control is-invalid');
+                  $("#p2").prop('class', 'form-group row has-danger');
+                  
+                  $("#pass2").prop('class', 'form-control is-invalid');
+                  $("#btnSubmit").prop('disabled', 'disabled');
+                  $("#divError1").html('');
+                  
+              }
+						
 					}
 				});
 				$('#pass2').keyup(function() {
@@ -477,8 +517,6 @@ $(document).ready(function() {
 						$("#pass2").prop('class', 'form-control is-invalid');
             
             $('#btnSubmit').attr('disabled','disabled');
-
-						// $("#divError").prop('class', 'invalid-feedback');
             
             $("#divError").html('The passwords does not match');
 
@@ -510,8 +548,13 @@ $(document).ready(function() {
         });
         $('.delBtn1').click(function() {
 				  $(".list_1").remove();
-	      });	
+	      });
 
+          $(".rad").change(function() {
+                $(".rad").prop('checked',false);
+                $(this).prop('checked',true);
+	      });		
+      
 });
 
 </script>

@@ -1,8 +1,10 @@
+
+
 <tr class="list_<?= $num; ?>">
- <td><?= $num; ?></td>
+ <td><?= $num+1; ?></td>
  <td>
     <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <input type="text" class="form-control" name="company[]" id="company" required placeholder="Company Name">
             </div>
     </div>
@@ -48,10 +50,17 @@
             </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
-                <input id="radioCustom<?= $num; ?>" type="radio" value="1" name="a[]" id="a" class="form-control-custom radio-custom" required>
-                <label for="radioCustom<?= $num; ?>">Current Address</label>
-        </div>                                                                              
+       
+            <!-- <div class="col-sm-4 i-checks">
+                
+                <input class="rad form-control-custom" type="checkbox" name="cu[]" id="checkboxCustom">   
+                <label class="form-control-label" for="checkboxCustom2">Mark as my current address</label>
+            </div>   -->
+             <div class="col-sm-4 i-checks">
+                          <input id="checkboxCustom<?= $num; ?>" type="checkbox" class="rad form-control-custom" name="cu[<?= $num; ?>]" id="cu" value=true>
+                          <label for="checkboxCustom<?= $num; ?>">Mark as my current address</label>
+            </div>        
+                                                                            
     </div>
     <div class="row">
         <div class="col-sm-6">
@@ -76,9 +85,18 @@
 <tr>
 <script>
 $(document).ready(function() {
+    // $('.rad').bootstrapSwitch();
+
     $('.delBtn<?= $num; ?>').click(function() {
 				$(".list_<?= $num; ?>").remove();
 	});	
+
+    $(".rad").change(function() {
+                
+				$(".rad").prop('checked',false);
+                $(this).prop('checked',true);
+	      });		
+      
 });
 
 </script>

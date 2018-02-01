@@ -88,9 +88,21 @@ class Dashboard extends CI_Controller{
 						);
 
 						$id = $this->m_shopper->insert($arr2);
-
+					
 						$sizeArr = sizeof($arr['AddId']);
 						for ($i=0; $i < $sizeArr; $i++) { 
+
+							if (isset($arr['cu'][$i])) 
+							{
+								// if ($arr['cu'][$i] == true) {
+								// 	$curr=1;	
+								// }
+								$curr=1;
+							}
+							else {
+								$curr=0;
+							}
+
 							$arr3 = array(
 								'sh_id' => $id,
 								'sa_address' => $arr['address'][$i],
@@ -99,10 +111,11 @@ class Dashboard extends CI_Controller{
 								'sa_city' => $arr['city'][$i],								
 								'sa_company' => $arr['company'][$i],
 								'sa_country' => $arr['country'][$i],
+								'sa_current' => $curr,
 								'sa_note' => $arr['note'][$i],
 							 );
-
-							$this->m_shopper_address->insert($arr3);		
+							
+							$this->m_shopper_address->insert($arr3);	
 						}
 
 						$email['fromName'] = "Ai System";
