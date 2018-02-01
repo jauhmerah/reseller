@@ -34,7 +34,7 @@
 						</div> -->
 
 						<div>
-							<a href="#" class="txt1">
+							<a href="<?= site_url('shopper/forgot'); ?>" class="txt1">
 								Forgot password?
 							</a>
 						</div>

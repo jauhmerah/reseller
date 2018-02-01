@@ -59,6 +59,7 @@ $route['admin/forgot'] = 'admin/a_user/forgotPass';
 $route['distributor'] = 'distributor/d_user/login';
 $route['distro'] = 'distributor/d_user/login';
 $route['distributor/logout'] = 'distributor/d_user/logout';
+$route['distributor/forgot'] = 'distributor/d_user/forgotPass';
 
 $route['shopper'] = 'shopper/s_user/login';
 $route['shop'] = 'shopper/s_user/login';

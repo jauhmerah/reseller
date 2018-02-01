@@ -22,11 +22,21 @@
 				if ($user) {
 					$this->mfp->update(array('fp_hit' => 1));
 					$data['user'] = $user;
-					$this->load->view('login/header');
-					$this->load->view($this->parent_page."/admin/VchangePassword" , $data);
-					$this->load->view('login/footer');
+						$this->load->view('login/header');
+						switch ($user->person_type) {
+							case 'a':
+								$this->load->view($this->parent_page."/admin/VchangePassword" , $data);
+								break;
+							case 'd':
+								$this->load->view($this->parent_page."/distributor/VchangePassword" , $data);
+								break;
+							case 's':
+								$this->load->view($this->parent_page."/shopper/VchangePassword" , $data);
+								break;
+						}
+						$this->load->view('login/footer');
 				}else{
-					$this->session->set_flashdata('warning' , 'This link is invalid');
+					$this->session->set_flashdata('warning' , 'This link session was invalid');
 					redirect(site_url() , 'refresh');
 				}
 	        }else{
