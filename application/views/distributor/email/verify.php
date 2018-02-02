@@ -44,8 +44,13 @@
 						<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateContainerMiddle">
 							<tbody><tr>
 								<td valign="top" class="bodyContent" mc:edit="body_content">
-                  <h2>Your Email Account Has Been Verified.</h2>
-									<p>Click the button below to access the reseller system.</p>
+                  
+                  <h2>Your Email Has Been Verified.</h2>
+									<p>Click Button Below to Access Reseller System.</p>
+                  
+                  
+                  
+                  
 									
 
 <br>
@@ -59,11 +64,15 @@
 				<td align="center" valign="top">
 						<!-- BEGIN BODY // -->
 						<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateContainerMiddle">
-							<tbody><tr>
+							<tbody>
+                            
+                            <tr>
 								<td valign="top" class="bodyContentCenter" mc:edit="body_content_centered">
-                  <a class="blue-btn" href="<?= site_url('distributor/Dashboard/verify?auth=').$this->my_func->en($id); ?>"><strong>Verify Your Email</strong></a>
+
+                                <a class="blue-btn" href="<?= site_url('shopper'); ?>"><strong>Go To Login Page</strong></a>
 								</td>
 							</tr>
+
 						</tbody></table>
 						<!-- // END BODY -->
 					</td>

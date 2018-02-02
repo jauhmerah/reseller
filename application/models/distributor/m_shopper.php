@@ -134,6 +134,14 @@ class M_shopper extends CI_Model {
      * @param Array $where Optional. Associative array field_name=>value, for where condition. If specified, $id is not used
      * @return int Number of affected rows by the update query
      */
+    public function verify(Array $data, $where = array())
+    {
+        if (!is_array($where)) {
+                $where = array(self::PRI_INDEX => $where);
+            }
+        $this->db->update(self::TABLE_NAME, $data, $where);
+        return $this->db->affected_rows();
+    }
     public function update(Array $data, $where = array()) {
             if (!is_array($where)) {
                 $where = array(self::PRI_INDEX => $where);

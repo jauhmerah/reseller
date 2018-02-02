@@ -9,8 +9,10 @@ class Dashboard extends CI_Controller{
 
 	var $version = "Reseller System v1.0";
     public function __construct() {
-        parent::__construct();        
+		parent::__construct();
+		$this->load->library('my_func');
         $this->load->helper('access');
+        $this->load->helper('sendEmail');
         checkSession('distributor');
     }
 
@@ -79,16 +81,12 @@ class Dashboard extends CI_Controller{
 							'sh_avatar' =>  $background,
 						);
 
-						$id = $this->m_shopper->insert($arr2);
-					
+						$temp['id'] = $this->m_shopper->insert($arr2);
 						$sizeArr = sizeof($arr['AddId']);
 						for ($i=0; $i < $sizeArr; $i++) { 
 
 							if (isset($arr['cu'][$i])) 
 							{
-								// if ($arr['cu'][$i] == true) {
-								// 	$curr=1;	
-								// }
 								$curr=1;
 							}
 							else {
@@ -96,7 +94,7 @@ class Dashboard extends CI_Controller{
 							}
 
 							$arr3 = array(
-								'sh_id' => $id,
+								'sh_id' => $temp['id'],
 								'sa_address' => $arr['address'][$i],
 								'sa_tel' => $arr['phone'][$i],
 								'sa_postcode' => $arr['postcode'][$i],
@@ -110,14 +108,11 @@ class Dashboard extends CI_Controller{
 							$this->m_shopper_address->insert($arr3);	
 						}
 
-						$email['fromName'] = "Ai System";
-                        $email['fromEmail'] = "noreply@nastyjuice.com";
-                        $email['toEmail'] = ' finance@nastyjuice.com , zul@nastyjuice.com ';
-                        $email['subject'] = 'Verify your e-mail address of your reseller system account';
-                        $email['html'] = true;
-						
-						$email['msg'] = $this->load->view($this->parent_page.'/email/Vverify',$arr,true);
-						sendEmail($email);
+							
+						$email= $this->load->view($this->parent_page.'/email/Vverify',$temp,true);
+
+						sendEmail2($arr['email'],'Verify your e-mail address of your reseller system account',$email);
+
 						$this->session->set_flashdata('success','Shopper Details are successfully added, Shopper need to verify their account first to activate their account.');
 						redirect(site_url('distributor/dashboard/page/m1'),'refresh');
 						
@@ -265,7 +260,35 @@ class Dashboard extends CI_Controller{
 				}
                 
             }
-        }
+		}
+		
+		public function verify()
+		{
+			if ($this->input->get()) 
+			{
+				$arr['id'] = $this->my_func->de($this->input->get('auth'));
+
+				$this->load->database();
+				$this->load->model($this->parent_page.'/m_shopper');
+
+				$data2 = array('sh_verify' => 1 );
+				$data = $this->m_shopper->verify($data2,$arr['id']);
+
+				if ($data) 
+				{	
+					$this->load->view($this->parent_page.'/email/verify',true);		
+				}
+				else
+				{	
+					$this->load->view($this->parent_page.'/email/notverify',$arr,true);		
+				}
+			}
+			else 
+			{
+				$this->session->set_flashdata('danger','You have no rights to access this page!');
+				redirect(site_url(),'refresh');
+			}
+		}
 
         public function getAjaxAddList()
         {

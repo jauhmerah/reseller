@@ -60,6 +60,8 @@ $route['distributor'] = 'distributor/d_user/login';
 $route['distro'] = 'distributor/d_user/login';
 $route['distributor/logout'] = 'distributor/d_user/logout';
 
+
+
 $route['shopper'] = 'shopper/s_user/login';
 $route['shop'] = 'shopper/s_user/login';
 $route['shopper/logout'] = 'shopper/s_user/logout';
