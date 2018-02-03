@@ -160,4 +160,39 @@ class D_user extends CI_Controller {
 		$this->load->view('login/footer');
 	}
 
+	public function forgotPass()
+	{
+		if ($this->input->post('email')) {
+			$email = $this->input->post('email');
+			$user_id = $this->mu->get_user_id_from_email($email);
+			if($user_id){
+				$this->load->model('user_setting/M_forgot_pass', 'mfp');
+				$fp_ip = $this->input->ip_address();
+				// NOTE: person_type : M_{?}_user > model name;
+				$fp_id = $this->mfp->insert(array('person_id' => $user_id , 'person_type' => 'd' , 'fp_ip' => $fp_ip));
+				if ($fp_id) {
+					$data['user'] = $this->mfp->getForgot($fp_id , 'a');
+					$msg = $this->load->view('login/email/V_email_forgot' , $data , TRUE);
+					$this->load->helper('sendEmail');
+					// CHANGED: change sendEmail2 to sendEmail;
+					if (sendEmail2($email , 'Reset Password' , $msg)) {
+						$this->session->set_flashdata('success' , 'Sending reset email to '.$email.' done.');
+					}
+					redirect(site_url('distributor') , 'refresh');
+				}else{
+					$this->session->set_flashdata('danger' , 'Forgot Password Module Error : #aufp01');
+					redirect(site_url('distributor/forgot'));
+				}
+			}else{
+				// NOTE: Klu xjumpo email in database.
+				$this->session->set_flashdata('danger' , 'Email not found!!!');
+				redirect(site_url('distributor/forgot'));
+			}
+		}else{
+			$this->load->view('login/header');
+			$this->load->view($this->parent_page."/Vforgotpswd");
+			$this->load->view('login/footer');
+		}
+	}
+
 }
